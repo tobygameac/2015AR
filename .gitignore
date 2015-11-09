@@ -1,2 +1,20 @@
-*.swp
 Personal Homework/
+
+/Temp
+/Library
+/obj
+/Builds
+/UnityGenerated
+
+/ExportedObj
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+*.swp
