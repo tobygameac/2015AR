@@ -1,0 +1,108 @@
+fileFormatVersion: 2
+guid: 7c0def012e051624c84bf5327328eae9
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: OilTank001
+    100004: OilTank002
+    100006: OilTank003
+    100008: OilTank004
+    100010: RFur
+    100012: RFur001
+    100014: RFur002
+    100016: RFur003
+    100018: Spindle001
+    100020: Spindle002
+    100022: Spindle003
+    100024: Spindle004
+    400000: //RootNode
+    400002: OilTank001
+    400004: OilTank002
+    400006: OilTank003
+    400008: OilTank004
+    400010: RFur
+    400012: RFur001
+    400014: RFur002
+    400016: RFur003
+    400018: Spindle001
+    400020: Spindle002
+    400022: Spindle003
+    400024: Spindle004
+    2300000: OilTank001
+    2300002: OilTank002
+    2300004: OilTank003
+    2300006: OilTank004
+    2300008: Spindle001
+    2300010: Spindle002
+    2300012: Spindle003
+    2300014: Spindle004
+    3300000: OilTank001
+    3300002: OilTank002
+    3300004: OilTank003
+    3300006: OilTank004
+    3300008: Spindle001
+    3300010: Spindle002
+    3300012: Spindle003
+    3300014: Spindle004
+    4300000: Spindle001
+    4300002: OilTank001
+    4300004: Spindle002
+    4300006: OilTank002
+    4300008: Spindle004
+    4300010: OilTank004
+    4300012: Spindle003
+    4300014: OilTank003
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

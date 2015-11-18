@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Building
+  - PlacementPlaneOpen
+  - PlacementPlaneTaken
+  - Attack
+  - "\u57FA\u790E\u6A5F\u68B0"
+  - "\u7DE9\u901F\u5149\u74B0"
+  - "\u71C3\u71D2\u88DD\u7F6E"
+  - "\u96F7\u5C04\u88DD\u7F6E"
+  - "\u96F7\u5C04\u52A0\u8FB2\u7832"
+  - "\u70C8\u7130\u88DD\u7F6E"
+  - "\u706B\u7130\u52A0\u8FB2\u7832"
+  - PlacementTileAvailable
+  - PlacementTileOccupied
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PlacementPlane
+  - Building
+  - Enemy
+  - PlacementTile
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 614e78ecb09a4af49ae023cbcc61583d
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - myGUISkin: {instanceID: 0}
+  - myGUITexture: {instanceID: 0}
+  - highlightTexture: {instanceID: 0}
+  - towerFrameTexture: {instanceID: 0}
+  - originalMat: {instanceID: 0}
+  - hoverMat: {instanceID: 0}
+  - placementPlanesRoot: {instanceID: 0}
+  - lastHitPlane: {instanceID: 0}
+  - mainBuilding: {instanceID: 0}
+  - lastHitBuilding: {instanceID: 0}
+  - selectingBuilding: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
