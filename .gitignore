@@ -18,4 +18,4 @@ Unity Projects/**/*.user
 Unity Projects/**/*.unityproj
 Unity Projects/**/*.booproj
 
-**/*.swp
+*.swp

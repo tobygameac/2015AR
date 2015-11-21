@@ -222,16 +222,6 @@ public class CharacterStats : MonoBehaviour {
     }
   }
 
-  private GameObject _tileOccupied;
-  public GameObject TileOccupied {
-    get {
-      return _tileOccupied;
-    }
-    set {
-      _tileOccupied = value;
-    }
-  }
-
   [SerializeField]
   private GameObject _nextLevel;
   public GameObject NextLevel {

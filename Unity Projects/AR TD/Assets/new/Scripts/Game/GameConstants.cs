@@ -17,7 +17,6 @@ public static class GameConstants {
   public enum PlayerState {
     IDLE,
     COMBINATING_BUILDINGS,
-    VIEWING_BUILDING_LIST,
     VIEWING_TECHNOLOGY_LIST,
     EXITING
   }
@@ -118,7 +117,7 @@ public static class GameConstants {
         _detailOfTechnologyID = new string[Enum.GetNames(typeof(GameConstants.TechnologyID)).Length];
         _detailOfTechnologyID[(int)TechnologyID.UPGRADE] = "裝置將可以進行升級，得到更強的能力";
         _detailOfTechnologyID[(int)TechnologyID.COMBINATE] = "可以將兩個裝置進行組合，組合前需將裝置升到最高等級；組合公式需由玩家自行發掘";
-        
+
         _detailOfTechnologyID[(int)TechnologyID.SELF_LEARNING] = "裝置將根據擊殺數來增強攻擊力，每個擊殺數增加 ";
         _detailOfTechnologyID[(int)TechnologyID.SELF_LEARNING] += (SELF_LEARNING_IMPROVEMENT_PERCENT_PER_KILL * 100).ToString("0.00") + "% 傷害";
 
@@ -175,8 +174,8 @@ public static class GameConstants {
   public static readonly float IMPROVEMENT_PROBABILITY_SCALE_PER_WAVE = 0.05f;
 
   // Other modifier
-  public static readonly int[] WAVE_THERSHOLD_FOR_THE_NEXT_HP_SCALER = new int[]{1,      3,    5,    7,   10,   12,   15,   20,   30,   50};
-  public static readonly float[] HP_SCALER_FOR_WAVE =               new float[]{1.0f, 1.1f, 1.3f, 1.5f, 1.7f, 1.8f, 2.0f, 1.6f, 1.4f, 1.2f};
+  public static readonly int[] WAVE_THERSHOLD_FOR_THE_NEXT_HP_SCALER = new int[] { 1, 3, 5, 7, 10, 12, 15, 20, 30, 50 };
+  public static readonly float[] HP_SCALER_FOR_WAVE = new float[] { 1.0f, 1.1f, 1.3f, 1.5f, 1.7f, 1.8f, 2.0f, 1.6f, 1.4f, 1.2f };
 
   public static readonly float COST_MODIFIER_FOR_EACH_WAVE = 0.5f;
 

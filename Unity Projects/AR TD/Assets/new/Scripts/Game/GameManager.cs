@@ -9,11 +9,15 @@ public class GameManager : MonoBehaviour {
 
   public List<Component> componentsToAdd;
 
-  [SerializeField]
-  private List<Transform> spawningPoints;
+  [System.Serializable]
+  private struct EnemyPath {
+    public Transform spawningPoints;
+    public List<Vector3> path;
+  };
 
   [SerializeField]
-  private List<Vector3> enemyPath;
+  private List<EnemyPath> enemyPaths;
+
   public GameObject pathArrow;
   public float distancePerArrow = 5.0f;
 
@@ -168,7 +172,14 @@ public class GameManager : MonoBehaviour {
   void Start() {
     game = GetComponent<Game>();
     gameState = GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE;
-    GeneratePathArrows(enemyPath, distancePerArrow);
+
+    for (int i = 0; i < enemyPaths.Count; ++i) {
+      if (enemyPaths[i].path.Count == 0 || enemyPaths[i].path[0] != enemyPaths[i].spawningPoints.position) {
+        // Set spawing point as the first point of path
+        enemyPaths[i].path.Insert(0, enemyPaths[i].spawningPoints.position);
+      }
+      GeneratePathArrows(enemyPaths[i], distancePerArrow);
+    }
 
     MessageManager.AddMessage("請建造攻擊裝置抵擋即將入侵的病菌");
   }
@@ -217,14 +228,18 @@ public class GameManager : MonoBehaviour {
     }
   }
 
-  private void GeneratePathArrows(List<Vector3> path, float distancePerArrow) {
-    if (path.Count == 0) {
-      return;
-    }
+  private void GeneratePathArrows(EnemyPath enemyPath, float distancePerArrow) {
     if (distancePerArrow <= 1e-5) {
       return;
     }
-    for (int i = 0; i < path.Count; ++i) {
+
+    List<Vector3> path = enemyPath.path;
+
+    if (path.Count == 0) {
+      return;
+    }
+
+    for (int i = 1; i < path.Count; ++i) {
       Vector3 arrowDirection = (path[i] - path[(i + path.Count - 1) % path.Count]).normalized;
       Quaternion arrowAngle = Quaternion.FromToRotation(Vector3.forward, arrowDirection);
       float distanceBetweenPoints = Vector3.Distance(path[i], path[(i + path.Count - 1) % path.Count]);
@@ -252,10 +267,11 @@ public class GameManager : MonoBehaviour {
 
     GameObject enemyPrefab = enemyPrefabs[Random.Range(0, indexRangeOfEnemyToGenerate)];
 
-    int spwaningPointIndex = Random.Range(0, spawningPoints.Count);
-    Vector3 spawningPosition = spawningPoints[spwaningPointIndex].position;
+    int enemyPathIndex = Random.Range(0, enemyPaths.Count);
+    EnemyPath enemyPath = enemyPaths[enemyPathIndex];
+    Vector3 spawningPosition = enemyPath.spawningPoints.position;
 
-    GameObject newEnemy = CharacterGenerator.GenerateCharacter(enemyPrefab, spawningPosition, enemyPath);
+    GameObject newEnemy = CharacterGenerator.GenerateCharacter(enemyPrefab, spawningPosition, enemyPath.path);
 
     EnemyStatsModifier.AddRandomImprovementWithWave(newEnemy, currentWave);
     EnemyStatsModifier.ModifyStatsWithWave(newEnemy.GetComponent<CharacterStats>(), currentWave);
