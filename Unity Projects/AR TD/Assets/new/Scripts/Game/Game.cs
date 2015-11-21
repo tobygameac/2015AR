@@ -27,8 +27,6 @@ public partial class Game : MonoBehaviour {
   public GameObject selectedBuildingHighlightObject;
 
   // Building
-  public GameObject coreGameObject;
-
   [SerializeField]
   private List<GameObject> buildingList;
   public List<GameObject> BuildingList {
@@ -185,14 +183,11 @@ public partial class Game : MonoBehaviour {
 
     // Hover
     if (Physics.Raycast(ray, out raycastHit, 1000, buildingLayerMask)) {
-      if (raycastHit.collider.gameObject.transform.parent != null) {
-        // Find a real building object
-        do {
-          lastHoverBuilding = raycastHit.collider.transform.parent.gameObject;
-        } while (lastHoverBuilding.transform.parent != null);
-      } else {
-        lastHoverBuilding = raycastHit.collider.gameObject;
+      Transform lastHoverBuildingTransform = raycastHit.collider.transform;
+      while (lastHoverBuildingTransform.parent != null) {
+        lastHoverBuildingTransform = lastHoverBuildingTransform.parent;
       }
+      lastHoverBuilding = lastHoverBuildingTransform.gameObject;
     } else {
       lastHoverBuilding = null;
     }
@@ -371,34 +366,41 @@ public partial class Game : MonoBehaviour {
     }
   }
 
-  private void Upgrade() {
-
-    if (selectedBuilding.GetComponent<CharacterStats>().NextLevel == null) {
+  public void UpgradeBuilding(GameObject buildingToUpgrade) {
+    if (buildingToUpgrade.GetComponent<CharacterStats>().NextLevel == null) {
       return;
     }
 
-    GameObject newBuilding = selectedBuilding.GetComponent<CharacterStats>().NextLevel;
-    int upgradeCost = newBuilding.GetComponent<CharacterStats>().Cost - selectedBuilding.GetComponent<CharacterStats>().Cost;
+    if (!HasTechnology(GameConstants.TechnologyID.UPGRADE)) {
+      MessageManager.AddMessage("須先研發升級技術");
+      return;
+    }
+
+    GameObject newBuilding = buildingToUpgrade.GetComponent<CharacterStats>().NextLevel;
+    int upgradeCost = newBuilding.GetComponent<CharacterStats>().Cost - buildingToUpgrade.GetComponent<CharacterStats>().Cost;
     if (money >= upgradeCost) {
-      MessageManager.AddMessage("升級完成 : " + GameConstants.NameOfBuildingID[(int)selectedBuilding.GetComponent<CharacterStats>().BuildingID]);
+      MessageManager.AddMessage("升級完成 : " + GameConstants.NameOfBuildingID[(int)buildingToUpgrade.GetComponent<CharacterStats>().BuildingID]);
       AudioManager.PlayAudioClip(researchSound);
 
       money -= upgradeCost;
 
-      newBuilding = Instantiate(newBuilding, selectedBuilding.transform.position, selectedBuilding.transform.rotation) as GameObject;
+      newBuilding = Instantiate(newBuilding, buildingToUpgrade.transform.position, buildingToUpgrade.transform.rotation) as GameObject;
 
-      newBuilding.GetComponent<CharacterStats>().UnitKilled = selectedBuilding.GetComponent<CharacterStats>().UnitKilled;
+      newBuilding.GetComponent<CharacterStats>().UnitKilled = buildingToUpgrade.GetComponent<CharacterStats>().UnitKilled;
 
-      newBuilding.GetComponent<CharacterStats>().DamageModifier = selectedBuilding.GetComponent<CharacterStats>().DamageModifier;
+      newBuilding.GetComponent<CharacterStats>().DamageModifier = buildingToUpgrade.GetComponent<CharacterStats>().DamageModifier;
 
-      Destroy(selectedBuilding.gameObject);
+      Destroy(buildingToUpgrade.gameObject);
 
-      selectedBuilding = newBuilding;
+      if (selectedBuilding == buildingToUpgrade) {
+        selectedBuilding = newBuilding;
+      }
     } else {
       AudioManager.PlayAudioClip(errorSound);
       MessageManager.AddMessage("需要更多金錢");
     }
   }
+
 
   private void Combinate() {
     playerState = GameConstants.PlayerState.COMBINATING_BUILDINGS;

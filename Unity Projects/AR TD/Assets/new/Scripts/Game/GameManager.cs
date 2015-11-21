@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour {
 
   private Game game;
 
+  [SerializeField]
+  private List<GameObject> coreGameObjects;
+
+  private List<CharacterStats> coreGameObjectsStats;
+
   public List<Component> componentsToAdd;
 
   [System.Serializable]
@@ -20,9 +25,6 @@ public class GameManager : MonoBehaviour {
 
   public GameObject pathArrow;
   public float distancePerArrow = 5.0f;
-
-  [SerializeField]
-  private List<Vector3> corePositions;
 
   [SerializeField]
   private List<GameObject> enemyPrefabs;
@@ -171,11 +173,20 @@ public class GameManager : MonoBehaviour {
 
   void Start() {
     game = GetComponent<Game>();
+
     gameState = GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE;
+
+    coreGameObjectsStats = null;
+    if (coreGameObjects != null && coreGameObjects.Count > 0) {
+      coreGameObjectsStats = new List<CharacterStats>(new CharacterStats[coreGameObjects.Count]);
+      for (int i = 0; i < coreGameObjects.Count; ++i) {
+        coreGameObjectsStats[i] = coreGameObjects[i].GetComponent<CharacterStats>();
+      }
+    }
 
     for (int i = 0; i < enemyPaths.Count; ++i) {
       if (enemyPaths[i].path.Count == 0 || enemyPaths[i].path[0] != enemyPaths[i].spawningPoints.position) {
-        // Set spawing point as the first point of path
+        // Set spawing position as the first point of path
         enemyPaths[i].path.Insert(0, enemyPaths[i].spawningPoints.position);
       }
       GeneratePathArrows(enemyPaths[i], distancePerArrow);
@@ -201,6 +212,15 @@ public class GameManager : MonoBehaviour {
     if (gameState == GameConstants.GameState.MIDDLE_OF_THE_WAVE) {
       remainingTimeOfCurrentWave += GameConstants.ADDITIONAL_TIME_BY_LAST_STAND;
       GameConstants.ADDITIONAL_TIME_BY_LAST_STAND = 0;
+      if (coreGameObjectsStats != null && coreGameObjectsStats.Count > 0) {
+        for (int i = 0; i < coreGameObjectsStats.Count; ++i) {
+          if (coreGameObjectsStats[i].CurrentHP <= 0) {
+            gameState = GameConstants.GameState.LOSED;
+            MessageManager.AddMessage("遊戲結束，請輸入您的名稱將分數登入排行榜");
+            return;
+          }
+        }
+      }
       if (currentWave < maxWave || (game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
         remainingTimeOfCurrentWave -= Time.deltaTime;
         if (remainingTimeOfCurrentWave < 0) {

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public partial class Game : MonoBehaviour {
-  
+
   public GameObject HUDCanvas;
   public GameObject basicButtonCanvas;
   public GameObject techonologyListCanvas;
@@ -55,7 +55,7 @@ public partial class Game : MonoBehaviour {
       return;
     }
     //AudioManager.PlayAudioClip(researchSound);
-    Upgrade();
+    UpgradeBuilding(selectedBuilding);
   }
 
   public void OnCombinateButtonClick() {
@@ -111,12 +111,14 @@ public partial class Game : MonoBehaviour {
     for (int i = 0; i < technologyManager.AvailableTechnology.Count; ++i) {
       GameObject button = Instantiate(buttonTemplate) as GameObject;
       button.transform.SetParent(techonologyListCanvas.transform);
-      
+
       button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
       button.GetComponent<RectTransform>().localPosition = new Vector3(-380 + button.GetComponent<RectTransform>().sizeDelta.x * i * 1.1f, -150, 0);
-      
+
       int buttonIndex = i; // Delegate is capturing a reference to the variable i
-      button.GetComponent<Button>().onClick.AddListener(delegate{OnTechnologyListButtonClick(buttonIndex);});
+      button.GetComponent<Button>().onClick.AddListener(delegate {
+        OnTechnologyListButtonClick(buttonIndex);
+      });
 
       string technologyName = technologyManager.AvailableTechnology[i].Name;
       button.transform.GetChild(0).GetComponent<Text>().text = technologyName + "(" + (i + 1) + ")";
@@ -143,7 +145,7 @@ public partial class Game : MonoBehaviour {
       return;
     }
 
-    basicButtonCanvas.SetActive((playerState == GameConstants.PlayerState.IDLE 
+    basicButtonCanvas.SetActive((playerState == GameConstants.PlayerState.IDLE
                               || playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST)
                               && systemState == GameConstants.SystemState.PLAYING);
     techonologyListCanvas.SetActive(playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST && systemState == GameConstants.SystemState.PLAYING);
