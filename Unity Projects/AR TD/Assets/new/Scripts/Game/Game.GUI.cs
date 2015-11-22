@@ -23,14 +23,6 @@ public partial class Game : MonoBehaviour {
 
   private List<GameObject> technologyButtons;
 
-  public void OnViewTechnologyListButtonClick() {
-    if (gameState == GameConstants.GameState.FINISHED || gameState == GameConstants.GameState.LOSED) {
-      return;
-    }
-    AudioManager.PlayAudioClip(buttonSound);
-    ViewTechnologyList();
-  }
-
   public void OnResearchButtonClick() {
     if (gameState == GameConstants.GameState.FINISHED || gameState == GameConstants.GameState.LOSED) {
       return;
@@ -64,14 +56,6 @@ public partial class Game : MonoBehaviour {
     }
     AudioManager.PlayAudioClip(buttonSound);
     Combinate();
-  }
-
-  public void OnSellButtonClick() {
-    if (gameState == GameConstants.GameState.FINISHED || gameState == GameConstants.GameState.LOSED) {
-      return;
-    }
-    AudioManager.PlayAudioClip(sellSound);
-    Sell();
   }
 
   public void OnPauseButtonClick() {
@@ -145,16 +129,13 @@ public partial class Game : MonoBehaviour {
       return;
     }
 
-    basicButtonCanvas.SetActive((playerState == GameConstants.PlayerState.IDLE
-                              || playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST)
-                              && systemState == GameConstants.SystemState.PLAYING);
-    techonologyListCanvas.SetActive(playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST && systemState == GameConstants.SystemState.PLAYING);
+    basicButtonCanvas.SetActive(playerState == GameConstants.PlayerState.IDLE && systemState == GameConstants.SystemState.PLAYING);
+    techonologyListCanvas.SetActive(systemState == GameConstants.SystemState.PLAYING);
     pauseMenuCanvas.SetActive(systemState == GameConstants.SystemState.PAUSE_MENU);
     audioMenuCanvas.SetActive(systemState == GameConstants.SystemState.AUDIO_MENU);
 
     if (ViewingTechnologyIndex >= 0 && ViewingTechnologyIndex < technologyManager.AvailableTechnology.Count) {
-      technologyDetailCanvas.SetActive(playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST
-                                      && systemState == GameConstants.SystemState.PLAYING);
+      technologyDetailCanvas.SetActive(systemState == GameConstants.SystemState.PLAYING);
     } else {
       technologyDetailCanvas.SetActive(false);
     }

@@ -28,6 +28,8 @@ public partial class Game : MonoBehaviour {
 
   // Building
   [SerializeField]
+  private List<GameObject> initialBuildingList;
+
   private List<GameObject> buildingList;
   public List<GameObject> BuildingList {
     get {
@@ -35,8 +37,7 @@ public partial class Game : MonoBehaviour {
     }
   }
 
-  [SerializeField]
-  private List<GameObject> initialBuildingList;
+  private Dictionary<GameObject, int> buildingListIndexMapping;
 
   [SerializeField]
   private int initialBuildingNumber;
@@ -46,10 +47,9 @@ public partial class Game : MonoBehaviour {
     }
   }
 
-  private int currentBuildingNumber;
   public int CurrentBuildingNumber {
     get {
-      return currentBuildingNumber;
+      return buildingList.Count;
     }
   }
 
@@ -82,6 +82,7 @@ public partial class Game : MonoBehaviour {
       selectedBuildingHighlightObject.SetActive(value != null);
     }
   }
+
   public GameObject SelectedBuilding {
     get {
       return _selectedBuilding;
@@ -192,57 +193,13 @@ public partial class Game : MonoBehaviour {
       lastHoverBuilding = null;
     }
 
-
-    GameObject newBuilding;
-
     if (!EventSystem.current.IsPointerOverGameObject()) {
-      // Left click
+      // Left button down
       if (Input.GetMouseButtonDown(0)) {
         if (lastHoverBuilding != null) {
           if (playerState == GameConstants.PlayerState.COMBINATING_BUILDINGS) {
-            if (lastHoverBuilding == selectedBuilding) {
-              MessageManager.AddMessage("請選擇本身以外的裝置進行組合");
-              return;
-            }
-            CharacterStats buildingStats1 = selectedBuilding.GetComponent<CharacterStats>();
-            CharacterStats buildingStats2 = lastHoverBuilding.GetComponent<CharacterStats>();
-            GameConstants.BuildingID buildingID1 = buildingStats1.BuildingID;
-            GameConstants.BuildingID buildingID2 = buildingStats2.BuildingID;
-            newBuilding = CombinationTable.GetCombinationObject(buildingID1, buildingID2);
-            if (newBuilding != null) {
-              if (buildingStats1.NextLevel != null || buildingStats2.NextLevel != null) {
-                AudioManager.PlayAudioClip(errorSound);
-                MessageManager.AddMessage("需將兩個裝置都升級到最高等級才能進行組合");
-              } else {
-                // Build new building on the position of selected building
-                newBuilding = Instantiate(newBuilding, selectedBuilding.transform.position/* + new Vector3(0, 1, 0) */, Quaternion.identity) as GameObject;
-                CharacterStats newBuildingStats = newBuilding.GetComponent<CharacterStats>();
-                newBuildingStats.UnitKilled = buildingStats1.UnitKilled + buildingStats2.UnitKilled;
-                newBuildingStats.DamageModifier = buildingStats1.DamageModifier + buildingStats2.DamageModifier;
-
-                // Adjust cost, prevent from money laundering
-                int originalCost = buildingStats1.Cost + buildingStats2.Cost;
-                if (originalCost < newBuildingStats.Cost) {
-                  newBuildingStats.Cost = originalCost;
-                }
-
-                // Clear original building
-                Destroy(selectedBuilding);
-                Destroy(lastHoverBuilding);
-
-                selectedBuilding = newBuilding;
-                --currentBuildingNumber;
-
-                AudioManager.PlayAudioClip(buildSound);
-
-                MessageManager.AddMessage("將 " + GameConstants.NameOfBuildingID[(int)buildingID1] + " 與 " + GameConstants.NameOfBuildingID[(int)buildingID2] + " 進行組合");
-                MessageManager.AddMessage("組合完畢 : " + GameConstants.NameOfBuildingID[(int)newBuildingStats.BuildingID]);
-
-                playerState = GameConstants.PlayerState.IDLE;
-              }
-            } else {
-              AudioManager.PlayAudioClip(errorSound);
-              MessageManager.AddMessage("無法將 " + GameConstants.NameOfBuildingID[(int)buildingID1] + " 與 " + GameConstants.NameOfBuildingID[(int)buildingID2] + " 進行組合");
+            if (CombinateBuilding(selectedBuilding, lastHoverBuilding)) {
+              playerState = GameConstants.PlayerState.IDLE;
             }
             return;
           }
@@ -266,11 +223,9 @@ public partial class Game : MonoBehaviour {
           lastHoverBuilding = selectedBuilding = null;
         }
 
-        if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
-          ViewTechnologyList();
-        }
       }
 
+      // Left button up
       if (Input.GetMouseButtonUp(0)) {
         isDraggingBuilding = false;
       }
@@ -288,9 +243,7 @@ public partial class Game : MonoBehaviour {
 
     // Esc
     if (Input.GetKeyDown(KeyCode.Escape)) {
-      if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
-        ViewTechnologyList();
-      } else if (selectedBuilding != null) {
+      if (selectedBuilding != null) {
         if (playerState == GameConstants.PlayerState.COMBINATING_BUILDINGS) {
           playerState = GameConstants.PlayerState.IDLE;
         }
@@ -331,18 +284,15 @@ public partial class Game : MonoBehaviour {
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.R)) {
-      if (playerState == GameConstants.PlayerState.IDLE
-        || playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
-        OnViewTechnologyListButtonClick();
-      }
-    }
+    //for (int i = 0; i < technologyManager.AvailableTechnology.Count; ++i) {
+    //  if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
+    //    OnTechnologyListButtonClick(i);
+    //  }
+    //}
 
-    if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
-      for (int i = 0; i < technologyManager.AvailableTechnology.Count; ++i) {
-        if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
-          OnTechnologyListButtonClick(i);
-        }
+    for (int i = 0; i < buildingList.Count; ++i) {
+      if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
+        buildingList[i].transform.position = new Vector3(0, 1, 0);
       }
     }
 
@@ -356,28 +306,20 @@ public partial class Game : MonoBehaviour {
     }
   }
 
-  private void ViewTechnologyList() {
-    lastHoverBuilding = selectedBuilding = null;
-
-    if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
-      playerState = GameConstants.PlayerState.IDLE;
-    } else {
-      playerState = GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST;
-    }
-  }
-
-  public void UpgradeBuilding(GameObject buildingToUpgrade) {
+  public bool UpgradeBuilding(GameObject buildingToUpgrade) {
     if (buildingToUpgrade.GetComponent<CharacterStats>().NextLevel == null) {
-      return;
+      return false;
     }
 
     if (!HasTechnology(GameConstants.TechnologyID.UPGRADE)) {
       MessageManager.AddMessage("須先研發升級技術");
-      return;
+      return false;
     }
 
     GameObject newBuilding = buildingToUpgrade.GetComponent<CharacterStats>().NextLevel;
+
     int upgradeCost = newBuilding.GetComponent<CharacterStats>().Cost - buildingToUpgrade.GetComponent<CharacterStats>().Cost;
+
     if (money >= upgradeCost) {
       MessageManager.AddMessage("升級完成 : " + GameConstants.NameOfBuildingID[(int)buildingToUpgrade.GetComponent<CharacterStats>().BuildingID]);
       AudioManager.PlayAudioClip(researchSound);
@@ -390,15 +332,88 @@ public partial class Game : MonoBehaviour {
 
       newBuilding.GetComponent<CharacterStats>().DamageModifier = buildingToUpgrade.GetComponent<CharacterStats>().DamageModifier;
 
-      Destroy(buildingToUpgrade.gameObject);
+      selectedBuilding = newBuilding;
 
-      if (selectedBuilding == buildingToUpgrade) {
-        selectedBuilding = newBuilding;
-      }
-    } else {
-      AudioManager.PlayAudioClip(errorSound);
-      MessageManager.AddMessage("需要更多金錢");
+      // Update building list
+      int buildingToUpgradeIndex = buildingListIndexMapping[buildingToUpgrade];
+      buildingListIndexMapping[newBuilding] = buildingToUpgradeIndex;
+      buildingList[buildingToUpgradeIndex] = newBuilding;
+
+      buildingListIndexMapping.Remove(buildingToUpgrade);
+
+      Destroy(buildingToUpgrade);
+
+      return true;
     }
+
+    AudioManager.PlayAudioClip(errorSound);
+    MessageManager.AddMessage("需要更多金錢");
+
+    return false;
+  }
+
+  public bool CombinateBuilding(GameObject building1, GameObject building2) {
+    if (building1 == building2) {
+      MessageManager.AddMessage("請選擇本身以外的裝置進行組合");
+      return false;
+    }
+    CharacterStats buildingStats1 = building1.GetComponent<CharacterStats>();
+    CharacterStats buildingStats2 = building2.GetComponent<CharacterStats>();
+    GameConstants.BuildingID buildingID1 = buildingStats1.BuildingID;
+    GameConstants.BuildingID buildingID2 = buildingStats2.BuildingID;
+    GameObject newBuilding = CombinationTable.GetCombinationObject(buildingID1, buildingID2);
+    if (newBuilding != null) {
+      if (buildingStats1.NextLevel != null || buildingStats2.NextLevel != null) {
+        AudioManager.PlayAudioClip(errorSound);
+        MessageManager.AddMessage("需將兩個裝置都升級到最高等級才能進行組合");
+        return false;
+      }
+
+      // Build new building on the position of building 1
+      newBuilding = Instantiate(newBuilding, building1.transform.position/* + new Vector3(0, 1, 0) */, Quaternion.identity) as GameObject;
+      CharacterStats newBuildingStats = newBuilding.GetComponent<CharacterStats>();
+      newBuildingStats.UnitKilled = buildingStats1.UnitKilled + buildingStats2.UnitKilled;
+      newBuildingStats.DamageModifier = buildingStats1.DamageModifier + buildingStats2.DamageModifier;
+
+      selectedBuilding = newBuilding;
+
+      // Adjust cost, prevent from money laundering
+      int originalCost = buildingStats1.Cost + buildingStats2.Cost;
+      if (originalCost < newBuildingStats.Cost) {
+        newBuildingStats.Cost = originalCost;
+      }
+
+      // Replace building 2 as a basic building
+      int initialBuildingIndex = Random.Range(0, initialBuildingList.Count);
+      GameObject replacedBuilding = Instantiate(initialBuildingList[initialBuildingIndex], building2.transform.position, Quaternion.identity) as GameObject;
+
+      AudioManager.PlayAudioClip(buildSound);
+
+      MessageManager.AddMessage("將 " + GameConstants.NameOfBuildingID[(int)buildingID1] + " 與 " + GameConstants.NameOfBuildingID[(int)buildingID2] + " 進行組合");
+      MessageManager.AddMessage("組合完畢 : " + GameConstants.NameOfBuildingID[(int)newBuildingStats.BuildingID]);
+
+      // Update building list
+      int building1Index = buildingListIndexMapping[building1];
+      buildingListIndexMapping[newBuilding] = building1Index;
+      buildingList[building1Index] = newBuilding;
+
+      buildingListIndexMapping.Remove(building1);
+
+      int building2Index = buildingListIndexMapping[building2];
+      buildingListIndexMapping[replacedBuilding] = building2Index;
+      buildingList[building2Index] = replacedBuilding;
+
+      buildingListIndexMapping.Remove(building2);
+
+      // Clear original building
+      Destroy(building1);
+      Destroy(building2);
+
+      return true;
+    }
+    AudioManager.PlayAudioClip(errorSound);
+    MessageManager.AddMessage("無法將 " + GameConstants.NameOfBuildingID[(int)buildingID1] + " 與 " + GameConstants.NameOfBuildingID[(int)buildingID2] + " 進行組合");
+    return false;
   }
 
 
@@ -406,17 +421,6 @@ public partial class Game : MonoBehaviour {
     playerState = GameConstants.PlayerState.COMBINATING_BUILDINGS;
 
     MessageManager.AddMessage("請選擇組合目標");
-  }
-
-  private void Sell() {
-    MessageManager.AddMessage("拆除 : " + GameConstants.NameOfBuildingID[(int)selectedBuilding.GetComponent<CharacterStats>().BuildingID]);
-    int remainingMoney = (int)(selectedBuilding.GetComponent<CharacterStats>().Cost * 0.8);
-    MessageManager.AddMessage("取回 " + remainingMoney + " 金錢");
-    money += remainingMoney;
-    --currentBuildingNumber;
-    Destroy(selectedBuilding.gameObject);
-
-    selectedBuilding = null;
   }
 
   private void Pause() {
@@ -500,6 +504,9 @@ public partial class Game : MonoBehaviour {
 
     StartCoroutine(AudioManager.PlayFadeInLoopAudioClip(backgroundMusic, 10.0f));
 
+    buildingList = new List<GameObject>();
+    buildingListIndexMapping = new Dictionary<GameObject, int>();
+
     if (initialBuildingList.Count > 0) {
       for (int i = 0; i < initialBuildingNumber; ++i) {
         int initialBuildingIndex = Random.Range(0, initialBuildingList.Count);
@@ -508,7 +515,8 @@ public partial class Game : MonoBehaviour {
         GameConstants.BuildingID newBuildingID = newBuilding.GetComponent<CharacterStats>().BuildingID;
         MessageManager.AddMessage("建造完成 : " + GameConstants.NameOfBuildingID[(int)newBuildingID]);
 
-        ++currentBuildingNumber;
+        buildingList.Add(newBuilding);
+        buildingListIndexMapping[newBuilding] = i;
       }
     }
 

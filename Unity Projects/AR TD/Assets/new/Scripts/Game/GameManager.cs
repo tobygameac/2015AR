@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour {
   private List<GameObject> coreGameObjects;
 
   private List<CharacterStats> coreGameObjectsStats;
+  public List<CharacterStats> CoreGameObjectsStats {
+    get {
+      return coreGameObjectsStats;
+    }
+  }
 
   public List<Component> componentsToAdd;
 

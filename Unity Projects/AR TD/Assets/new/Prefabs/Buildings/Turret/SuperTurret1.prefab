@@ -254,7 +254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &175066
 GameObject:
   m_ObjectHideFlags: 1
@@ -447,7 +447,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 20.6851654, y: 0, z: -10.5759735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450992}
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c2f4245947a8f44bc322d55a27df0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rangeDisplayer: {fileID: 0}
+  _rangeDisplayer: {fileID: 173858}
   description: 
   _buildingID: 11
   _enemyID: 0
