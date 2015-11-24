@@ -50,6 +50,7 @@ public class CombinationZone : MonoBehaviour {
         toCombinationBuildingTransformList.RemoveAt(i--);
       }
     }
+
     for (int i = 0; i < toCombinationBuildingTransformList.Count; ++i) {
       for (int j = i + 1; j < toCombinationBuildingTransformList.Count; ++j) {
         if (game.CombinateBuilding(toCombinationBuildingTransformList[i].gameObject, toCombinationBuildingTransformList[j].gameObject)) {
