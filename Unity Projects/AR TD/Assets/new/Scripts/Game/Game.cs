@@ -13,6 +13,16 @@ public partial class Game : MonoBehaviour {
     }
   }
 
+  [SerializeField]
+  private GameObject ARToolkitGameObject;
+  private BuildingPositionHandler buildingPositionHandler;
+
+  [SerializeField]
+  private float mapWidth;
+
+  [SerializeField]
+  private float mapHeight;
+
   // Audio
   public AudioClip backgroundMusic;
   public AudioClip finishedMusic;
@@ -177,6 +187,20 @@ public partial class Game : MonoBehaviour {
 
     if (systemState != GameConstants.SystemState.PLAYING) {
       return;
+    }
+
+    if (buildingPositionHandler != null) {
+      List<BuildingPositionHandler.BuildingPositionStatus> buildingPositionStatusList = buildingPositionHandler.BuildingPositionStatusList;
+
+      const float MINIMAL_MOVING_DISTANCE = 0.1f;
+      for (int i = 0; i < buildingPositionStatusList.Count && i < buildingList.Count; ++i) {
+        if (buildingPositionStatusList[i].isVisible) {
+          Vector3 newBuildingPosition = new Vector3(mapWidth * (buildingPositionStatusList[i].xPercent - 0.5f), buildingList[i].transform.position.y, mapHeight * (buildingPositionStatusList[i].yPercent - 0.5f));
+          if (Vector3.Distance(buildingList[i].transform.position, newBuildingPosition) > MINIMAL_MOVING_DISTANCE) {
+            buildingList[i].transform.position = newBuildingPosition;
+          }
+        }
+      }
     }
 
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -489,6 +513,10 @@ public partial class Game : MonoBehaviour {
   private void InitializeGame() {
     Time.timeScale = 0;
 
+    if (ARToolkitGameObject != null) {
+      buildingPositionHandler = ARToolkitGameObject.GetComponent<BuildingPositionHandler>();
+    }
+
     technologyManager = new TechnologyManager();
     technologyManager.Initiate();
 
@@ -521,7 +549,6 @@ public partial class Game : MonoBehaviour {
     }
 
     isDraggingBuilding = false;
-
   }
 
 }
