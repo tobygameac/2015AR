@@ -113,48 +113,6 @@ Transform:
   - {fileID: 554594269}
   m_Father: {fileID: 1814076576}
   m_RootOrder: 1
---- !u!1001 &300467167
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 474836, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &401832487
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +139,7 @@ Light:
   serializedVersion: 6
   m_Type: 1
   m_Color: {r: .652261078, g: .74795264, b: .910447776, a: 1}
-  m_Intensity: 1
+  m_Intensity: .200000003
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -252,7 +210,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 447008, guid: 37af9a34b2efb7942b87523b2428bc77, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11403516, guid: 37af9a34b2efb7942b87523b2428bc77, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -300,7 +258,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 107992, guid: 37af9a34b2efb7942b87523b2428bc77, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 167770, guid: 37af9a34b2efb7942b87523b2428bc77, type: 2}
       propertyPath: m_IsActive
@@ -3831,7 +3789,7 @@ Prefab:
       objectReference: {fileID: 711203621}
     - target: {fileID: 11473124, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}
       propertyPath: initialBuildingNumber
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11473124, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}
       propertyPath: initialBuildingList.Array.data[0]
@@ -3899,15 +3857,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11473124, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}
       propertyPath: mapWidth
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 11473124, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}
       propertyPath: mapHeight
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 11473124, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}
       propertyPath: ARToolkitGameObject
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473124, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}
+      propertyPath: zones
+      value: 
+      objectReference: {fileID: 183646, guid: 52481a394ddda5f44a81cbc3913210c4, type: 2}
+    - target: {fileID: 11473124, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}
+      propertyPath: maxBuildingNumber
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11499584, guid: 94ab219c2e501444bafe3dffdbc804f9, type: 2}

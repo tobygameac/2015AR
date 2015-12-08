@@ -11,15 +11,25 @@ public class UpgradeZone : MonoBehaviour {
 
   private float timeAfterResting;
 
+  private bool initialized;
+
   void Start() {
+    initialized = false;
+
     game = Camera.main.GetComponent<Game>();
 
     buildingLayerMask = LayerMask.NameToLayer("Building");
 
     timeAfterResting = Time.time;
+
+    initialized = true;
   }
 
   void OnTriggerStay(Collider collider) {
+    if (!initialized) {
+      return;
+    }
+
     if (Time.time < timeAfterResting) {
       return;
     }

@@ -10,21 +10,31 @@ public class CombinationZone : MonoBehaviour {
 
   private List<Transform> toCombinationBuildingTransformList;
 
+  private bool initialized;
+
   void Start() {
+    initialized = false;
+
     game = Camera.main.GetComponent<Game>();
 
     buildingLayerMask = LayerMask.NameToLayer("Building");
 
     toCombinationBuildingTransformList = new List<Transform>();
+
+    initialized = true;
   }
 
   void OnTriggerEnter(Collider collider) {
+    if (!initialized) {
+      return;
+    }
     if (collider.gameObject.layer == buildingLayerMask) {
       Transform targetBuildingTransform = collider.transform;
       // Find real building object
       while (targetBuildingTransform.transform.parent != null) {
         targetBuildingTransform = targetBuildingTransform.parent;
       }
+
       toCombinationBuildingTransformList.Add(targetBuildingTransform);
 
       if (toCombinationBuildingTransformList.Count >= 2) {
@@ -34,6 +44,9 @@ public class CombinationZone : MonoBehaviour {
   }
 
   void OnTriggerExit(Collider collider) {
+    if (!initialized) {
+      return;
+    }
     if (collider.gameObject.layer == buildingLayerMask) {
       Transform targetBuildingTransform = collider.transform;
       // Find real building object

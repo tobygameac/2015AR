@@ -14,6 +14,9 @@ public partial class Game : MonoBehaviour {
   }
 
   [SerializeField]
+  private GameObject zones;
+
+  [SerializeField]
   private GameObject ARToolkitGameObject;
   private BuildingPositionHandler buildingPositionHandler;
 
@@ -106,34 +109,6 @@ public partial class Game : MonoBehaviour {
 
   // Technology
   private static TechnologyManager technologyManager;
-  private int _viewingTechnologyIndex;
-  private int viewingTechnologyIndex {
-    get {
-      return _viewingTechnologyIndex;
-    }
-    set {
-      _viewingTechnologyIndex = value;
-      if (value >= 0 && value < technologyManager.AvailableTechnology.Count) {
-        technologyDetailCanvas.SetActive(true);
-        _viewingTechnology = technologyManager.AvailableTechnology[viewingTechnologyIndex];
-      } else {
-        technologyDetailCanvas.SetActive(false);
-        _viewingTechnology = null;
-      }
-    }
-  }
-  public int ViewingTechnologyIndex {
-    get {
-      return _viewingTechnologyIndex;
-    }
-  }
-
-  public Technology _viewingTechnology;
-  public Technology ViewingTechnology {
-    get {
-      return _viewingTechnology;
-    }
-  }
 
   public GameObject freezingLevel1Effect;
   public GameObject freezingLevel2Effect;
@@ -155,6 +130,10 @@ public partial class Game : MonoBehaviour {
 
   public bool HasTechnology(GameConstants.TechnologyID technologyID) {
     return technologyManager.HasTechnology(technologyID);
+  }
+
+  public List<Technology> AvailableTechnology() {
+    return technologyManager.AvailableTechnology;
   }
 
   public void AddMoney(int moneyToAdd) {
@@ -501,6 +480,56 @@ public partial class Game : MonoBehaviour {
     return false;
   }
 
+  public bool ResearchTechnology(int technologyIndex) {
+    if (technologyIndex < 0 || technologyIndex >= technologyManager.AvailableTechnology.Count) {
+      return false;
+    }
+
+    Technology newTechnology = technologyManager.AvailableTechnology[technologyIndex];
+    int technologyCost = newTechnology.Cost;
+
+    if (money < technologyCost) {
+      return false;
+    }
+
+    money -= technologyCost;
+
+    if (newTechnology.ID == GameConstants.TechnologyID.ADDITIONAL_BUILDING_NUMBER) {
+      maxBuildingNumber += GameConstants.ADDITIONAL_BUILDING_NUMBER_PER_RESEARCH;
+    }
+
+    if (newTechnology.ID == GameConstants.TechnologyID.FREEZING_LEVEL1) {
+      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = Mathf.Min(GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER, GameConstants.FREEZING_LEVEL1_MOVING_SPEED_MODIFIER);
+      freezingLevel1Effect.GetComponent<ParticleSystem>().Play();
+    }
+
+    if (newTechnology.ID == GameConstants.TechnologyID.FREEZING_LEVEL2) {
+      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = GameConstants.FREEZING_LEVEL2_MOVING_SPEED_MODIFIER;
+      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = Mathf.Min(GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER, GameConstants.FREEZING_LEVEL2_MOVING_SPEED_MODIFIER);
+      freezingLevel1Effect.GetComponent<ParticleSystem>().Stop();
+      freezingLevel2Effect.GetComponent<ParticleSystem>().Play();
+    }
+
+    if (newTechnology.ID == GameConstants.TechnologyID.FREEZING_LEVEL3) {
+      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = Mathf.Min(GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER, GameConstants.FREEZING_LEVEL3_MOVING_SPEED_MODIFIER);
+      freezingLevel1Effect.GetComponent<ParticleSystem>().Stop();
+      freezingLevel2Effect.GetComponent<ParticleSystem>().Stop();
+      freezingLevel3Effect.GetComponent<ParticleSystem>().Play();
+    }
+
+    if (newTechnology.ID == GameConstants.TechnologyID.LAST_STAND) {
+      GameConstants.ADDITIONAL_TIME_BY_LAST_STAND += GameConstants.LAST_STAND_ADDITIONAL_TIME;
+    }
+
+    technologyManager.ResearchTechnology(technologyIndex);
+
+    MessageManager.AddMessage("研發完成 : " + newTechnology.Name);
+    for (int i = 0; i < technologyManager.NewTechnology.Count; ++i) {
+      MessageManager.AddMessage("發現新科技 : " + technologyManager.NewTechnology[i].Name);
+    }
+
+    return true;
+  }
 
   private void Combinate() {
     playerState = GameConstants.PlayerState.COMBINATING_BUILDINGS;
@@ -528,49 +557,6 @@ public partial class Game : MonoBehaviour {
     Application.LoadLevel("MainMenu");
   }
 
-  private void ResearchTechnology() {
-    int technologyCost = ViewingTechnology.Cost;
-
-    if (money < technologyCost) {
-      return;
-    }
-
-    money -= technologyCost;
-
-    if (ViewingTechnology.ID == GameConstants.TechnologyID.ADDITIONAL_BUILDING_NUMBER) {
-      maxBuildingNumber += GameConstants.ADDITIONAL_BUILDING_NUMBER_PER_RESEARCH;
-    }
-
-    if (ViewingTechnology.ID == GameConstants.TechnologyID.FREEZING_LEVEL1) {
-      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = Mathf.Min(GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER, GameConstants.FREEZING_LEVEL1_MOVING_SPEED_MODIFIER);
-      freezingLevel1Effect.GetComponent<ParticleSystem>().Play();
-    }
-
-    if (ViewingTechnology.ID == GameConstants.TechnologyID.FREEZING_LEVEL2) {
-      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = GameConstants.FREEZING_LEVEL2_MOVING_SPEED_MODIFIER;
-      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = Mathf.Min(GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER, GameConstants.FREEZING_LEVEL2_MOVING_SPEED_MODIFIER);
-      freezingLevel1Effect.GetComponent<ParticleSystem>().Stop();
-      freezingLevel2Effect.GetComponent<ParticleSystem>().Play();
-    }
-
-    if (ViewingTechnology.ID == GameConstants.TechnologyID.FREEZING_LEVEL3) {
-      GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER = Mathf.Min(GameConstants.GLOBAL_ENEMY_SPEED_MODIFIER, GameConstants.FREEZING_LEVEL3_MOVING_SPEED_MODIFIER);
-      freezingLevel1Effect.GetComponent<ParticleSystem>().Stop();
-      freezingLevel2Effect.GetComponent<ParticleSystem>().Stop();
-      freezingLevel3Effect.GetComponent<ParticleSystem>().Play();
-    }
-
-    if (ViewingTechnology.ID == GameConstants.TechnologyID.LAST_STAND) {
-      GameConstants.ADDITIONAL_TIME_BY_LAST_STAND += GameConstants.LAST_STAND_ADDITIONAL_TIME;
-    }
-
-    MessageManager.AddMessage("研發完成 : " + ViewingTechnology.Name);
-    technologyManager.ResearchTechnology(viewingTechnologyIndex);
-    for (int i = 0; i < technologyManager.NewTechnology.Count; ++i) {
-      MessageManager.AddMessage("發現新科技 : " + technologyManager.NewTechnology[i].Name);
-    }
-  }
-
   private void InitializeGame() {
     Time.timeScale = 0;
 
@@ -585,8 +571,6 @@ public partial class Game : MonoBehaviour {
 
     GameConstants.ResetModifier();
 
-    InitializeUI();
-
     Time.timeScale = 1;
 
     scoreSubmitted = false;
@@ -599,7 +583,7 @@ public partial class Game : MonoBehaviour {
     if (initialBuildingList.Count > 0) {
       for (int i = 0; i < initialBuildingNumber; ++i) {
         int initialBuildingIndex = Random.Range(0, initialBuildingList.Count);
-        GameObject newBuilding = Instantiate(initialBuildingList[initialBuildingIndex], new Vector3(Random.Range(0, 10), 1, Random.Range(0, 10)), Quaternion.identity) as GameObject;
+        GameObject newBuilding = Instantiate(initialBuildingList[initialBuildingIndex], new Vector3(Random.Range(0, mapWidth * 0.5f) - mapWidth * 0.25f, 1, Random.Range(0, mapHeight * 0.5f) - mapHeight * 0.25f), Quaternion.identity) as GameObject;
 
         GameConstants.BuildingID newBuildingID = newBuilding.GetComponent<CharacterStats>().BuildingID;
         MessageManager.AddMessage("建造完成 : " + GameConstants.NameOfBuildingID[(int)newBuildingID]);
@@ -610,6 +594,8 @@ public partial class Game : MonoBehaviour {
     }
 
     isDraggingBuilding = false;
+
+    Instantiate(zones);
   }
 
 }

@@ -67,8 +67,7 @@ public class BuildingPositionHandler : MonoBehaviour {
       }
     }
 
-    //if (visibleLocaterMarkerCount < 2) {
-    if (visibleLocaterMarkerCount < 4) {
+    if (visibleLocaterMarkerCount < 2) {
     } else {
       left = newLeft;
       top = newTop;
