@@ -54,20 +54,21 @@ public class BuildingPositionHandler : MonoBehaviour {
 
   void Update() {
 
-    int count = 0;
+    int visibleLocaterMarkerCount = 0;
     bool[] locaterMarkerIsVisible = new bool[locaterMarkersTrackedObjects.Length];
     float newLeft = 2e9f;
     float newTop = -2e9f;
     for (int i = 0; i < locaterMarkersTrackedObjects.Length; ++i) {
       if (locaterMarkersTrackedObjects[i].GetMarker().Visible) {
-        ++count;
+        ++visibleLocaterMarkerCount;
         locaterMarkerIsVisible[i] = true;
         newLeft = Mathf.Min(newLeft, locaterMarkers[i].position.x);
         newTop = Mathf.Max(newTop, locaterMarkers[i].position.z);
       }
     }
 
-    if (count < 2) {
+    //if (visibleLocaterMarkerCount < 2) {
+    if (visibleLocaterMarkerCount < 4) {
     } else {
       left = newLeft;
       top = newTop;
@@ -122,7 +123,7 @@ public class BuildingPositionHandler : MonoBehaviour {
         buildingPositionStatusList[i].isVisible = true;
       }
 
-      //Debug.Log((buildingPositionStatusList[i].isVisible ? "Ok" : "GG") + " : " + buildingPositionStatusList[i].xPercent + " " + buildingPositionStatusList[i].yPercent);
+      Debug.Log((buildingPositionStatusList[i].isVisible ? "Ok" : "GG") + " : " + buildingPositionStatusList[i].xPercent + " " + buildingPositionStatusList[i].yPercent);
     }
   }
 }

@@ -192,15 +192,27 @@ public partial class Game : MonoBehaviour {
     if (buildingPositionHandler != null) {
       List<BuildingPositionHandler.BuildingPositionStatus> buildingPositionStatusList = buildingPositionHandler.BuildingPositionStatusList;
 
-      const float MINIMAL_MOVING_DISTANCE = 0.1f;
+      const float MINIMAL_MOVING_DISTANCE = 0.2f;
+      const float MINIMAL_PLAYER_ADJUSTING_DISTANCE = 0.5f;
+
       for (int i = 0; i < buildingPositionStatusList.Count && i < buildingList.Count; ++i) {
         if (buildingPositionStatusList[i].isVisible) {
           Vector3 newBuildingPosition = new Vector3(mapWidth * (buildingPositionStatusList[i].xPercent - 0.5f), buildingList[i].transform.position.y, mapHeight * (buildingPositionStatusList[i].yPercent - 0.5f));
-          if (Vector3.Distance(buildingList[i].transform.position, newBuildingPosition) > MINIMAL_MOVING_DISTANCE) {
+          float movingDistance = Vector3.Distance(buildingList[i].transform.position, newBuildingPosition);
+          if (movingDistance > MINIMAL_MOVING_DISTANCE) {
             buildingList[i].transform.position = newBuildingPosition;
+            if (movingDistance > MINIMAL_PLAYER_ADJUSTING_DISTANCE) {
+              selectedBuilding = buildingList[i];
+            }
           }
+        } else {
+          //selectedBuilding = buildingList[i];
         }
       }
+    }
+
+    if (_selectedBuilding != null) {
+      selectedBuildingHighlightObject.transform.position = _selectedBuilding.transform.position;
     }
 
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -563,7 +575,7 @@ public partial class Game : MonoBehaviour {
     Time.timeScale = 0;
 
     if (ARToolkitGameObject != null) {
-      //buildingPositionHandler = ARToolkitGameObject.GetComponent<BuildingPositionHandler>();
+      buildingPositionHandler = ARToolkitGameObject.GetComponent<BuildingPositionHandler>();
     }
 
     technologyManager = new TechnologyManager();
