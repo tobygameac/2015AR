@@ -14,6 +14,7 @@ public class BuildingPositionHandler : MonoBehaviour {
   private float width;
   private float height;
 
+  private const float SMOOTHING_WIEGHT = 0.0f;
 
   public class BuildingPositionStatus {
 
@@ -66,35 +67,45 @@ public class BuildingPositionHandler : MonoBehaviour {
       }
     }
 
-    if (count > 0) {
-      left = newLeft;
-      top = newTop;
-    }
-
     if (count < 2) {
     } else {
+      left = newLeft;
+      top = newTop;
+
       float widthSum = 0;
       float heightSum = 0;
-      int w_count = 0, h_count = 0;
+
+      float newWidth = 0;
+      float newHeight = 0;
+
+      int widthCount = 0, heightCount = 0;
       for (int i = locaterMarkersTrackedObjects.Length - 1; i > 1; i -= 2) {
         if (locaterMarkerIsVisible[i]) {
           if (locaterMarkerIsVisible[i - 1]) {
-            ++w_count;
+            ++widthCount;
             widthSum += (locaterMarkers[i].position.x - left);
           }
           if (locaterMarkerIsVisible[i - 2]) {
-            ++h_count;
+            ++heightCount;
             heightSum += (top - locaterMarkers[i].position.z);
           }
         }
       }
 
-      if (w_count > 0) {        
-        width = widthSum / w_count;
+      if (widthCount > 0) {
+        newWidth = widthSum / widthCount;
       }
 
-      if (h_count > 0) {
-        height = heightSum / h_count;
+      if (heightCount > 0) {
+        newHeight = heightSum / heightCount;
+      }
+
+      if (newWidth > 0) {
+        width = newWidth;
+      }
+
+      if (newHeight > 0) {
+        height = newHeight;
       }
     }
 
@@ -106,8 +117,8 @@ public class BuildingPositionHandler : MonoBehaviour {
       buildingPositionStatusList[i].isVisible = false;
 
       if (buildingMarkersTrackedObjects[i].GetMarker().Visible) {
-        buildingPositionStatusList[i].xPercent = (buildingMarkers[i].position.x - left) / width;
-        buildingPositionStatusList[i].yPercent = 1 - ((top - buildingMarkers[i].position.z) / height);
+        buildingPositionStatusList[i].xPercent = SMOOTHING_WIEGHT * buildingPositionStatusList[i].xPercent + (1 - SMOOTHING_WIEGHT) * (buildingMarkers[i].position.x - left) / width;
+        buildingPositionStatusList[i].yPercent = SMOOTHING_WIEGHT * buildingPositionStatusList[i].yPercent + (1 - SMOOTHING_WIEGHT) * (1 - ((top - buildingMarkers[i].position.z) / height));
         buildingPositionStatusList[i].isVisible = true;
       }
 
@@ -115,4 +126,3 @@ public class BuildingPositionHandler : MonoBehaviour {
     }
   }
 }
-

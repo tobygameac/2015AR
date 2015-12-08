@@ -376,6 +376,55 @@ public partial class Game : MonoBehaviour {
     return false;
   }
 
+  public bool ChangeBuilding(GameObject buildingToUpgrade, GameObject newBuilding) {
+
+    if (newBuilding == null) {
+      return false;
+    }
+
+    int originalBuildingID = (int)buildingToUpgrade.GetComponent<CharacterStats>().BuildingID;
+    int newBuildingID = (int)newBuilding.GetComponent<CharacterStats>().BuildingID;
+
+    if (originalBuildingID == newBuildingID) {
+      return false;
+    }
+
+    int changeCost = newBuilding.GetComponent<CharacterStats>().Cost - buildingToUpgrade.GetComponent<CharacterStats>().Cost;
+
+    if (money >= changeCost) {
+      MessageManager.AddMessage("將" + GameConstants.NameOfBuildingID[originalBuildingID] + "改變為" + GameConstants.NameOfBuildingID[newBuildingID]);
+      AudioManager.PlayAudioClip(researchSound);
+
+      money -= changeCost;
+
+      MessageManager.AddMessage((changeCost < 0) ? ("取回" + -changeCost + "金錢") : ("花費" + changeCost + "金錢")); 
+
+      newBuilding = Instantiate(newBuilding, buildingToUpgrade.transform.position, buildingToUpgrade.transform.rotation) as GameObject;
+
+      newBuilding.GetComponent<CharacterStats>().UnitKilled = buildingToUpgrade.GetComponent<CharacterStats>().UnitKilled;
+
+      newBuilding.GetComponent<CharacterStats>().DamageModifier = buildingToUpgrade.GetComponent<CharacterStats>().DamageModifier;
+
+      selectedBuilding = newBuilding;
+
+      // Update building list
+      int buildingToUpgradeIndex = buildingListIndexMapping[buildingToUpgrade];
+      buildingListIndexMapping[newBuilding] = buildingToUpgradeIndex;
+      buildingList[buildingToUpgradeIndex] = newBuilding;
+
+      buildingListIndexMapping.Remove(buildingToUpgrade);
+
+      Destroy(buildingToUpgrade);
+
+      return true;
+    }
+
+    AudioManager.PlayAudioClip(errorSound);
+    MessageManager.AddMessage("需要更多金錢");
+
+    return false;
+  }
+
   public bool CombinateBuilding(GameObject building1, GameObject building2) {
     if (building1 == building2) {
       MessageManager.AddMessage("請選擇本身以外的裝置進行組合");
@@ -514,7 +563,7 @@ public partial class Game : MonoBehaviour {
     Time.timeScale = 0;
 
     if (ARToolkitGameObject != null) {
-      buildingPositionHandler = ARToolkitGameObject.GetComponent<BuildingPositionHandler>();
+      //buildingPositionHandler = ARToolkitGameObject.GetComponent<BuildingPositionHandler>();
     }
 
     technologyManager = new TechnologyManager();
