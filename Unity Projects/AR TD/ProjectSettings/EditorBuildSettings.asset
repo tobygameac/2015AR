@@ -6,28 +6,28 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/old/Scenes/MainMenu.unity
+    path: Assets/TD/old/Scenes/MainMenu.unity
   - enabled: 0
-    path: Assets/old/Scenes/Level1.unity
+    path: Assets/TD/old/Scenes/Level1.unity
   - enabled: 0
-    path: Assets/old/Scenes/Level2.unity
+    path: Assets/TD/old/Scenes/Level2.unity
   - enabled: 0
-    path: Assets/old/Scenes/Level3.unity
+    path: Assets/TD/old/Scenes/Level3.unity
   - enabled: 0
-    path: Assets/old/Scenes/Level4.unity
+    path: Assets/TD/old/Scenes/Level4.unity
   - enabled: 0
-    path: Assets/old/Scenes/Win.unity
+    path: Assets/TD/old/Scenes/Win.unity
   - enabled: 0
-    path: Assets/old/Scenes/SurvivalNormal.unity
+    path: Assets/TD/old/Scenes/SurvivalNormal.unity
   - enabled: 0
-    path: Assets/old/Scenes/SurvivalBoss.unity
+    path: Assets/TD/old/Scenes/SurvivalBoss.unity
   - enabled: 0
-    path: Assets/old/Scenes/Tutorial.unity
+    path: Assets/TD/old/Scenes/Tutorial.unity
   - enabled: 0
-    path: Assets/old/Scenes/Demo.unity
+    path: Assets/TD/old/Scenes/Demo.unity
+  - enabled: 0
+    path: Assets/TD/new/Scenes/MainMenu.unity
+  - enabled: 0
+    path: Assets/TD/new/Scenes/Scoreboard.unity
   - enabled: 1
-    path: Assets/new/Scenes/MainMenu.unity
-  - enabled: 1
-    path: Assets/new/Scenes/Scoreboard.unity
-  - enabled: 1
-    path: Assets/new/Scenes/SurvivalNormal.unity
+    path: Assets/TD/new/Scenes/SurvivalNormal.unity
