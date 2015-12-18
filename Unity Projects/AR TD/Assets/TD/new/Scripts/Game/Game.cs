@@ -374,7 +374,7 @@ public partial class Game : MonoBehaviour {
 
       newBuilding.GetComponent<CharacterStats>().DamageModifier = buildingToChange.GetComponent<CharacterStats>().DamageModifier;
 
-      //selectedBuilding = newBuilding;
+      selectedBuilding = newBuilding;
 
       //// Update building list
       //int buildingToUpgradeIndex = buildingListIndexMapping[buildingToChange];

@@ -14,7 +14,7 @@ public class RangeDisplayer : MonoBehaviour {
 
   void Start() {
     transformToDisplayRange = transform;
-    while (transformToDisplayRange.parent != null) {
+    while (transformToDisplayRange.gameObject.GetComponent<CharacterStats>() == null) {
       transformToDisplayRange = transform.parent;
     }
     sphereCollider = transformToDisplayRange.GetComponent<SphereCollider>();
