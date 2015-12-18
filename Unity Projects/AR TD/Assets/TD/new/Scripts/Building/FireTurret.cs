@@ -61,8 +61,8 @@ public class FireTurret : MonoBehaviour {
         }
       }
       Quaternion desiredRotation = Quaternion.LookRotation(target.position - muzzleBase.position);
-      desiredRotation.eulerAngles = new Vector3(muzzleBase.eulerAngles.x, desiredRotation.eulerAngles.y,muzzleBase.eulerAngles.z); // y-axis only
-      muzzleBase.rotation = Quaternion.Slerp(muzzleBase.rotation, desiredRotation, Time.deltaTime * turningSpeed);
+      desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y,muzzleBase.localEulerAngles.z); // y-axis only
+      muzzleBase.localRotation = Quaternion.Slerp(muzzleBase.localRotation, desiredRotation, Time.deltaTime * turningSpeed);
     } else {
       noTargetTime += Time.deltaTime;
       if (noTargetTime >= stopFireTimeWhenNoTarget) {
