@@ -26,7 +26,9 @@ public class RangeDisplayer : MonoBehaviour {
 
   void Update() {
     transform.localScale = Vector3.one * sphereCollider.radius;
-    imageToRotate.transform.Rotate(Vector3.up * Time.deltaTime * rotatingSpeed, Space.World);
+
+    //imageToRotate.transform.Rotate(Vector3.up * Time.deltaTime * rotatingSpeed, Space.World);
+    imageToRotate.transform.Rotate(Vector3.forward * Time.deltaTime * rotatingSpeed);
   }
 
 }

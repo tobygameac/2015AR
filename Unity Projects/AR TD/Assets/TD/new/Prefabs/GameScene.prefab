@@ -1312,7 +1312,7 @@ MonoBehaviour:
   description: 
   _buildingID: 0
   _enemyID: 0
-  _basicHP: 50000
+  _basicHP: 30
   _hPModifier: 0
   _basicDamage: 0
   _damageModifier: 0
@@ -12968,7 +12968,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: .800000012, y: .100000001}
+  m_SizeDelta: {x: 1.20000005, y: .150000006}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22472898
 RectTransform:
@@ -12985,7 +12985,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -1.19209304e-07, y: 0}
-  m_SizeDelta: {x: .800000012, y: .100000001}
+  m_SizeDelta: {x: 1.20000005, y: .150000006}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22478192
 RectTransform:

@@ -51,9 +51,10 @@ public class ResearchZoneManager : MonoBehaviour {
     }
 
     if (game.ResearchTechnology(technologyIndex)) {
-      timeAfterResting = Time.time + restTimeAfterChange;
       UpdateResearchZones();
     }
+
+    timeAfterResting = Time.time + restTimeAfterChange;
 
     return;
   }

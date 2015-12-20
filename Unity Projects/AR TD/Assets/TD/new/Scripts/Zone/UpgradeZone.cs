@@ -42,8 +42,9 @@ public class UpgradeZone : MonoBehaviour {
       }
 
       if (game.UpgradeBuilding(targetBuildingTransform.gameObject)) {
-        timeAfterResting = Time.time + restTimeAfterUpgrading;
+        //timeAfterResting = Time.time + restTimeAfterUpgrading;
       }
+      timeAfterResting = Time.time + restTimeAfterUpgrading;
     }
   }
 }

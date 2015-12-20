@@ -29,11 +29,12 @@ public class InformationText : MonoBehaviour {
     }
 
     text.text += "金錢 : <color=yellow>" + game.Money + "</color>\n";
-    if (game.CurrentBuildingNumber == game.MaxBuildingNumber) {
-      text.text += "裝置數量 : <color=red>" + game.CurrentBuildingNumber + "</color> / <color=red>" + game.MaxBuildingNumber + "</color>\n";
-    } else {
-      text.text += "裝置數量 : <color=blue>" + game.CurrentBuildingNumber + "</color> / <color=blue>" + game.MaxBuildingNumber + "</color>\n";
-    }
+
+    //if (game.CurrentBuildingNumber == game.MaxBuildingNumber) {
+    //  text.text += "裝置數量 : <color=red>" + game.CurrentBuildingNumber + "</color> / <color=red>" + game.MaxBuildingNumber + "</color>\n";
+    //} else {
+    //  text.text += "裝置數量 : <color=blue>" + game.CurrentBuildingNumber + "</color> / <color=blue>" + game.MaxBuildingNumber + "</color>\n";
+    //}
 
     if (game.GameMode == GameConstants.GameMode.STORY) {
       text.text += "波數 : <color=blue>" + gameManager.CurrentWave + "</color> / <color=blue>" + gameManager.MaxWave + "</color>\n";

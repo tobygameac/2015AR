@@ -56,7 +56,7 @@ public class ScoreboardManager : MonoBehaviour {
 
     string scoreboardUrl;
     if (gameMode == GameConstants.GameMode.SURVIVAL_NORMAL) {
-      scoreboardUrl = "http://nanotd.tobygameac.com/SurvivalNormalScoreboard.php";
+      scoreboardUrl = "http://www.tobygameac.com/NanoTD/SurvivalNormalScoreboard.php";
     } else {
       yield break;
     }
@@ -76,7 +76,7 @@ public class ScoreboardManager : MonoBehaviour {
 
     string postScoreUrl;
     if (gameMode == GameConstants.GameMode.SURVIVAL_NORMAL) {
-      postScoreUrl = "http://nanotd.tobygameac.com/postSurvivalNormalScore.php";
+      postScoreUrl = "http://www.tobygameac.com/NanoTD/postSurvivalNormalScore.php";
     } else {
       yield break;
     }

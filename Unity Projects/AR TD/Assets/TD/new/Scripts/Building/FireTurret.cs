@@ -87,7 +87,7 @@ public class FireTurret : MonoBehaviour {
       if (Time.time >= nextAttackTime) {
         for (int i = 0; i < muzzles.Length; ++i) {
           Quaternion desiredRotation = Quaternion.LookRotation(collider.transform.position - muzzleBase.position);
-          float angleToEnemy = Quaternion.Angle(muzzles[i].rotation, desiredRotation);
+          float angleToEnemy = Quaternion.Angle(muzzles[i].localRotation, desiredRotation);
           if (angleToEnemy <= attackingAngleForEachMuzzle / 2) {
             target = collider.transform;
             CharacterStats targetCharacterStats = collider.GetComponent<CharacterStats>();
