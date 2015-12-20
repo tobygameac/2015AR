@@ -117,6 +117,7 @@ GameObject:
   - 33: {fileID: 3368678}
   - 23: {fileID: 2319256}
   - 114: {fileID: 11469184}
+  - 114: {fileID: 11435096}
   m_Layer: 0
   m_Name: BasicTurretFrameMarker
   m_TagString: Untagged
@@ -633,6 +634,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11435096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 807409db061deb740904b9e4a9d27475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingSpeedAlertThreshold: 20
+  checkTimeGap: .100000001
 --- !u!114 &11446380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -896,7 +910,27 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: movingSpeedAlertThreshold
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: checkTimeGap
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 170964}

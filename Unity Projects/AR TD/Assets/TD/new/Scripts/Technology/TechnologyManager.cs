@@ -45,12 +45,14 @@ public class TechnologyManager {
                     }
     ));
     */
-    technologyList.Add(new Technology(GameConstants.TechnologyID.ADDITIONAL_BUILDING_NUMBER, 10000, true,
-                    new GameConstants.TechnologyID[] {
-                      GameConstants.TechnologyID.COMBINATE,
-                      //GameConstants.TechnologyID.SELF_HEALING
-                    }
-    ));
+
+    //technologyList.Add(new Technology(GameConstants.TechnologyID.ADDITIONAL_BUILDING_NUMBER, 10000, true,
+    //                new GameConstants.TechnologyID[] {
+    //                  GameConstants.TechnologyID.COMBINATE,
+    //                  //GameConstants.TechnologyID.SELF_HEALING
+    //                }
+    //));
+
     technologyList.Add(new Technology(GameConstants.TechnologyID.FREEZING_LEVEL1, 5000));
     technologyList.Add(new Technology(GameConstants.TechnologyID.FREEZING_LEVEL2, 10000,
                     new GameConstants.TechnologyID[] {
@@ -63,7 +65,7 @@ public class TechnologyManager {
                     }
     ));
 
-    technologyList.Add(new Technology(GameConstants.TechnologyID.LAST_STAND, 20000, true));
+    //technologyList.Add(new Technology(GameConstants.TechnologyID.LAST_STAND, 20000, true));
 
     UpdateAvailableTechnologyList();
   }

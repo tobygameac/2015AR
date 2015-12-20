@@ -3,13 +3,15 @@ using System.Collections;
 
 public class FrameMarkerMovingDetector : MonoBehaviour {
 
-  public float movingSpeedAlertThreshold = 1.0f;
+  public float movingSpeedAlertThreshold = 3.0f;
 
   public float checkTimeGap = 1.0f;
 
   private Vector3 lastPosition;
 
   private float lastCheckTime;
+
+  private GameObject buildingBelongsToThisFrame;
 
   private static Game game;
 
@@ -30,12 +32,12 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
 
       if (movingSpeed >= movingSpeedAlertThreshold) {
 
-        GameObject buildingBelongsToThisFrame = null;
-
-        foreach (Transform childTransform in transform) {
-          if (childTransform.GetComponent<CharacterStats>() != null) {
-            buildingBelongsToThisFrame = childTransform.gameObject;
-            break;
+        if (buildingBelongsToThisFrame == null) {
+          foreach (Transform childTransform in transform) {
+            if (childTransform.GetComponent<CharacterStats>() != null) {
+              buildingBelongsToThisFrame = childTransform.gameObject;
+              break;
+            }
           }
         }
 
@@ -43,10 +45,11 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
           game.selectedBuilding = buildingBelongsToThisFrame;
         }
       }
+
+      lastPosition = transform.position;
       lastCheckTime = Time.time;
     }
 
-    lastPosition = transform.position;
   }
 
 }

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof(CharacterStats))]
-[RequireComponent (typeof(SphereCollider))]
+[RequireComponent(typeof(CharacterStats))]
+[RequireComponent(typeof(SphereCollider))]
 public class FireTurret : MonoBehaviour {
 
   //public AudioClip projectileSound;
@@ -61,7 +61,7 @@ public class FireTurret : MonoBehaviour {
         }
       }
       Quaternion desiredRotation = Quaternion.LookRotation(target.position - muzzleBase.position);
-      desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y,muzzleBase.localEulerAngles.z); // y-axis only
+      desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y, muzzleBase.localEulerAngles.z); // y-axis only
       muzzleBase.localRotation = Quaternion.Slerp(muzzleBase.localRotation, desiredRotation, Time.deltaTime * turningSpeed);
     } else {
       noTargetTime += Time.deltaTime;
@@ -87,7 +87,8 @@ public class FireTurret : MonoBehaviour {
       if (Time.time >= nextAttackTime) {
         for (int i = 0; i < muzzles.Length; ++i) {
           Quaternion desiredRotation = Quaternion.LookRotation(collider.transform.position - muzzleBase.position);
-          float angleToEnemy = Quaternion.Angle(muzzles[i].localRotation, desiredRotation);
+          desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y, muzzleBase.localEulerAngles.z); // y-axis only
+          float angleToEnemy = Quaternion.Angle(muzzleBase.localRotation, desiredRotation);
           if (angleToEnemy <= attackingAngleForEachMuzzle / 2) {
             target = collider.transform;
             CharacterStats targetCharacterStats = collider.GetComponent<CharacterStats>();

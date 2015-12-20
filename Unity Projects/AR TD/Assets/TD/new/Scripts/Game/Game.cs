@@ -32,7 +32,6 @@ public partial class Game : MonoBehaviour {
   public AudioClip buildSound;
   public AudioClip errorSound;
   public AudioClip deniedSound;
-  public AudioClip sellSound;
   public AudioClip researchSound;
 
   public GameObject selectedBuildingHighlightObject;
@@ -421,8 +420,6 @@ public partial class Game : MonoBehaviour {
       newBuildingStats.UnitKilled = buildingStats1.UnitKilled + buildingStats2.UnitKilled;
       newBuildingStats.DamageModifier = buildingStats1.DamageModifier + buildingStats2.DamageModifier;
 
-      selectedBuilding = newBuilding;
-
       // Adjust cost, prevent from money laundering
       int originalCost = buildingStats1.Cost + buildingStats2.Cost;
       if (originalCost < newBuildingStats.Cost) {
@@ -456,6 +453,8 @@ public partial class Game : MonoBehaviour {
       // Clear original building
       Destroy(building1);
       Destroy(building2);
+
+      selectedBuilding = newBuilding;
 
       return true;
     }
