@@ -73,7 +73,8 @@ public partial class Game : MonoBehaviour {
   public LayerMask buildingLayerMask;
   private GameObject lastHoverBuilding;
   private GameObject _selectedBuilding;
-  private GameObject selectedBuilding {
+
+  public GameObject selectedBuilding {
     get {
       return _selectedBuilding;
     }
