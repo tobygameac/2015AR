@@ -17,6 +17,8 @@ public static class GameConstants {
   public enum PlayerState {
     IDLE,
     COMBINATING_BUILDINGS,
+    VIEWING_BUILDING_LIST,
+    VIEWING_TECHNOLOGY_LIST,
     EXITING
   }
 

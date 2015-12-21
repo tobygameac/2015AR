@@ -25,9 +25,9 @@ EditorBuildSettings:
     path: Assets/TD/old/Scenes/Tutorial.unity
   - enabled: 0
     path: Assets/TD/old/Scenes/Demo.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/TD/new/Scenes/MainMenu.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/TD/new/Scenes/Scoreboard.unity
   - enabled: 1
     path: Assets/TD/new/Scenes/SurvivalNormal.unity

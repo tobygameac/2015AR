@@ -38,12 +38,10 @@ public partial class Game : MonoBehaviour {
 
   // Building
   [SerializeField]
-  private List<GameObject> initialBuildingList;
-
-  private List<GameObject> buildingList;
-  public List<GameObject> BuildingList {
+  private List<GameObject> basicBuildingList;
+  public List<GameObject> BasicBuildingList {
     get {
-      return buildingList;
+      return basicBuildingList;
     }
   }
 
@@ -52,12 +50,6 @@ public partial class Game : MonoBehaviour {
   public int InitialBuildingNumber {
     get {
       return initialBuildingNumber;
-    }
-  }
-
-  public int CurrentBuildingNumber {
-    get {
-      return buildingList.Count;
     }
   }
 
@@ -98,13 +90,71 @@ public partial class Game : MonoBehaviour {
     }
   }
 
-  private bool isDraggingBuilding;
+  //private bool isDraggingBuilding;
 
   private Vector3 selectedBuildingPositionOnScreen;
   private Vector3 selectedBuildingPositionOffset;
 
+  private int _viewingBuildingIndex;
+  private int viewingBuildingIndex {
+    get {
+      return _viewingBuildingIndex;
+    }
+    set {
+      _viewingBuildingIndex = value;
+
+      if (value >= 0 && value < basicBuildingList.Count) {
+        _viewingBuildingToChange = BasicBuildingList[value];
+        buildingDetailCanvas.SetActive(true);
+      } else {
+        buildingDetailCanvas.SetActive(false);
+        _viewingBuildingToChange = null;
+      }
+    }
+  }
+  public int ViewingBuildingIndex {
+    get {
+      return _viewingBuildingIndex;
+    }
+  }
+
+  private GameObject _viewingBuildingToChange;
+  public GameObject ViewingBuildingToChange {
+    get {
+      return _viewingBuildingToChange;
+    }
+  }
+
   // Technology
   private static TechnologyManager technologyManager;
+  private int _viewingTechnologyIndex;
+  private int viewingTechnologyIndex {
+    get {
+      return _viewingTechnologyIndex;
+    }
+    set {
+      _viewingTechnologyIndex = value;
+      if (value >= 0 && value < technologyManager.AvailableTechnology.Count) {
+        technologyDetailCanvas.SetActive(true);
+        _viewingTechnology = technologyManager.AvailableTechnology[value];
+      } else {
+        technologyDetailCanvas.SetActive(false);
+        _viewingTechnology = null;
+      }
+    }
+  }
+  public int ViewingTechnologyIndex {
+    get {
+      return _viewingTechnologyIndex;
+    }
+  }
+
+  private Technology _viewingTechnology;
+  public Technology ViewingTechnology {
+    get {
+      return _viewingTechnology;
+    }
+  }
 
   public GameObject freezingLevel1Effect;
   public GameObject freezingLevel2Effect;
@@ -168,67 +218,67 @@ public partial class Game : MonoBehaviour {
       selectedBuildingHighlightObject.transform.position = _selectedBuilding.transform.position;
     }
 
-    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    RaycastHit raycastHit;
+    //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //RaycastHit raycastHit;
 
-    // Hover
-    if (Physics.Raycast(ray, out raycastHit, 1000, buildingLayerMask)) {
-      Transform lastHoverBuildingTransform = raycastHit.collider.transform;
-      while (lastHoverBuildingTransform.GetComponent<CharacterStats>() == null) {
-          lastHoverBuildingTransform = lastHoverBuildingTransform.parent;
-      }
-      lastHoverBuilding = lastHoverBuildingTransform.gameObject;
-    } else {
-      lastHoverBuilding = null;
-    }
+    //// Hover
+    //if (Physics.Raycast(ray, out raycastHit, 1000, buildingLayerMask)) {
+    //  Transform lastHoverBuildingTransform = raycastHit.collider.transform;
+    //  while (lastHoverBuildingTransform.GetComponent<CharacterStats>() == null) {
+    //      lastHoverBuildingTransform = lastHoverBuildingTransform.parent;
+    //  }
+    //  lastHoverBuilding = lastHoverBuildingTransform.gameObject;
+    //} else {
+    //  lastHoverBuilding = null;
+    //}
 
-    if (!EventSystem.current.IsPointerOverGameObject()) {
-      // Left button down
-      if (Input.GetMouseButtonDown(0)) {
-        if (lastHoverBuilding != null) {
-          if (playerState == GameConstants.PlayerState.COMBINATING_BUILDINGS) {
-            if (CombinateBuilding(selectedBuilding, lastHoverBuilding)) {
-              playerState = GameConstants.PlayerState.IDLE;
-            }
-            return;
-          }
-          if (playerState == GameConstants.PlayerState.IDLE) {
-            selectedBuilding = lastHoverBuilding;
-            selectedBuildingPositionOnScreen = Camera.main.WorldToScreenPoint(selectedBuilding.transform.position);
-            selectedBuildingPositionOffset = selectedBuilding.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectedBuildingPositionOnScreen.z));
-            isDraggingBuilding = true;
-          }
-        }
+    //if (!EventSystem.current.IsPointerOverGameObject()) {
+    //  // Left button down
+    //  if (Input.GetMouseButtonDown(0)) {
+    //    if (lastHoverBuilding != null) {
+    //      if (playerState == GameConstants.PlayerState.COMBINATING_BUILDINGS) {
+    //        if (CombinateBuilding(selectedBuilding, lastHoverBuilding)) {
+    //          playerState = GameConstants.PlayerState.IDLE;
+    //        }
+    //        return;
+    //      }
+    //      if (playerState == GameConstants.PlayerState.IDLE) {
+    //        selectedBuilding = lastHoverBuilding;
+    //        selectedBuildingPositionOnScreen = Camera.main.WorldToScreenPoint(selectedBuilding.transform.position);
+    //        selectedBuildingPositionOffset = selectedBuilding.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectedBuildingPositionOnScreen.z));
+    //        isDraggingBuilding = true;
+    //      }
+    //    }
 
-        if (lastHoverBuilding == null) {
+    //    if (lastHoverBuilding == null) {
 
-          if (playerState == GameConstants.PlayerState.COMBINATING_BUILDINGS) {
-            AudioManager.PlayAudioClip(errorSound);
-            MessageManager.AddMessage("請選擇正確的目標");
-            playerState = GameConstants.PlayerState.IDLE;
-            return;
-          }
+    //      if (playerState == GameConstants.PlayerState.COMBINATING_BUILDINGS) {
+    //        AudioManager.PlayAudioClip(errorSound);
+    //        MessageManager.AddMessage("請選擇正確的目標");
+    //        playerState = GameConstants.PlayerState.IDLE;
+    //        return;
+    //      }
 
-          lastHoverBuilding = selectedBuilding = null;
-        }
+    //      lastHoverBuilding = selectedBuilding = null;
+    //    }
 
-      }
+    //  }
 
-      // Left button up
-      if (Input.GetMouseButtonUp(0)) {
-        isDraggingBuilding = false;
-      }
-    }
+    //  // Left button up
+    //  if (Input.GetMouseButtonUp(0)) {
+    //    isDraggingBuilding = false;
+    //  }
+    //}
 
-    if (isDraggingBuilding) {
-      if (selectedBuilding != null) {
-        Vector3 cursorPositionOnScreen = new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectedBuildingPositionOnScreen.z);
-        Vector3 cursorPositionInWorld = Camera.main.ScreenToWorldPoint(cursorPositionOnScreen) + selectedBuildingPositionOffset;
-        Vector3 newBuildingPosition = new Vector3(cursorPositionInWorld.x, selectedBuilding.transform.position.y, cursorPositionInWorld.z);
+    //if (isDraggingBuilding) {
+    //  if (selectedBuilding != null) {
+    //    Vector3 cursorPositionOnScreen = new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectedBuildingPositionOnScreen.z);
+    //    Vector3 cursorPositionInWorld = Camera.main.ScreenToWorldPoint(cursorPositionOnScreen) + selectedBuildingPositionOffset;
+    //    Vector3 newBuildingPosition = new Vector3(cursorPositionInWorld.x, selectedBuilding.transform.position.y, cursorPositionInWorld.z);
 
-        SetBuildingPosition(selectedBuilding, newBuildingPosition);
-      }
-    }
+    //    SetBuildingPosition(selectedBuilding, newBuildingPosition);
+    //  }
+    //}
 
     // Esc
     if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -273,15 +323,33 @@ public partial class Game : MonoBehaviour {
       }
     }
 
-    //for (int i = 0; i < technologyManager.AvailableTechnology.Count; ++i) {
-    //  if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
-    //    OnTechnologyListButtonClick(i);
-    //  }
-    //}
+    if (Input.GetKeyDown(KeyCode.B)) {
+      if (playerState == GameConstants.PlayerState.IDLE
+        || playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST
+        || playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
+        OnViewBuildingListButtonClick();
+      }
+    }
 
-    for (int i = 0; i < buildingList.Count; ++i) {
-      if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
-        buildingList[i].transform.position = new Vector3(0, 1, 0);
+    if (Input.GetKeyDown(KeyCode.R)) {
+      if (playerState == GameConstants.PlayerState.IDLE
+        || playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST
+        || playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
+        OnViewTechnologyListButtonClick();
+      }
+    }
+
+    if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
+      for (int i = 0; i < basicBuildingList.Count; ++i) {
+        if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
+          OnBuildingListButtonClick(i);
+        }
+      }
+    } else if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
+      for (int i = 0; i < technologyManager.AvailableTechnology.Count; ++i) {
+        if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
+          OnTechnologyListButtonClick(i);
+        }
       }
     }
 
@@ -294,6 +362,35 @@ public partial class Game : MonoBehaviour {
       selectedBuildingHighlightObject.transform.position = targetPosition;
     }
   }
+
+  private void ViewBuildingList() {
+    lastHoverBuilding = selectedBuilding = null;
+    viewingBuildingIndex = viewingTechnologyIndex = -1;
+
+    AudioManager.PlayAudioClip(buttonSound);
+
+    if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
+      playerState = GameConstants.PlayerState.IDLE;
+    } else {
+      playerState = GameConstants.PlayerState.VIEWING_BUILDING_LIST;
+    }
+
+  }
+
+  private void ViewTechnologyList() {
+    lastHoverBuilding = selectedBuilding = null;
+    viewingBuildingIndex = viewingTechnologyIndex = -1;
+
+    AudioManager.PlayAudioClip(buttonSound);
+
+    if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
+      playerState = GameConstants.PlayerState.IDLE;
+    } else {
+      playerState = GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST;
+    }
+
+  }
+
 
   public bool UpgradeBuilding(GameObject buildingToUpgrade) {
     if (buildingToUpgrade.GetComponent<CharacterStats>().NextLevel == null) {
@@ -345,7 +442,15 @@ public partial class Game : MonoBehaviour {
 
   public bool ChangeBuilding(GameObject buildingToChange, GameObject newBuilding) {
 
+    if (buildingToChange == null) {
+      AudioManager.PlayAudioClip(errorSound);
+      MessageManager.AddMessage("請選擇需轉換建築");
+      return false;
+    }
+
     if (newBuilding == null) {
+      AudioManager.PlayAudioClip(errorSound);
+      MessageManager.AddMessage("請選擇轉換目標");
       return false;
     }
 
@@ -353,14 +458,16 @@ public partial class Game : MonoBehaviour {
     int newBuildingID = (int)newBuilding.GetComponent<CharacterStats>().BuildingID;
 
     if (originalBuildingID == newBuildingID) {
+      AudioManager.PlayAudioClip(errorSound);
+      MessageManager.AddMessage("同一建築無法互相轉換");
       return false;
     }
 
     int changeCost = newBuilding.GetComponent<CharacterStats>().Cost - buildingToChange.GetComponent<CharacterStats>().Cost;
 
     if (money >= changeCost) {
-      MessageManager.AddMessage("將" + GameConstants.NameOfBuildingID[originalBuildingID] + "改變為" + GameConstants.NameOfBuildingID[newBuildingID]);
-      AudioManager.PlayAudioClip(researchSound);
+      MessageManager.AddMessage("將" + GameConstants.NameOfBuildingID[originalBuildingID] + "轉換為" + GameConstants.NameOfBuildingID[newBuildingID]);
+      AudioManager.PlayAudioClip(buildSound);
 
       money -= changeCost;
 
@@ -384,6 +491,8 @@ public partial class Game : MonoBehaviour {
       //buildingListIndexMapping.Remove(buildingToChange);
 
       Destroy(buildingToChange);
+
+      viewingBuildingIndex = -1;
 
       return true;
     }
@@ -427,8 +536,8 @@ public partial class Game : MonoBehaviour {
       }
 
       // Replace building 2 as a basic building
-      int initialBuildingIndex = Random.Range(0, initialBuildingList.Count);
-      GameObject replacedBuilding = Instantiate(initialBuildingList[initialBuildingIndex], building2.transform.position, Quaternion.identity) as GameObject;
+      int basicBuildingIndex = Random.Range(0, basicBuildingList.Count);
+      GameObject replacedBuilding = Instantiate(basicBuildingList[basicBuildingIndex], building2.transform.position, Quaternion.identity) as GameObject;
 
       replacedBuilding.transform.parent = building2.transform.parent;
 
@@ -472,6 +581,8 @@ public partial class Game : MonoBehaviour {
     int technologyCost = newTechnology.Cost;
 
     if (money < technologyCost) {
+      AudioManager.PlayAudioClip(errorSound);
+      MessageManager.AddMessage("需要更多金錢");
       return false;
     }
 
@@ -511,16 +622,26 @@ public partial class Game : MonoBehaviour {
       MessageManager.AddMessage("發現新科技 : " + technologyManager.NewTechnology[i].Name);
     }
 
+    AudioManager.PlayAudioClip(researchSound);
+
+    viewingTechnologyIndex = -1;
+
+    InstantiateTechnologyButton();
+
     return true;
   }
 
   private void Combinate() {
+    AudioManager.PlayAudioClip(buttonSound);
+
     playerState = GameConstants.PlayerState.COMBINATING_BUILDINGS;
 
     MessageManager.AddMessage("請選擇組合目標");
   }
 
   private void Pause() {
+    AudioManager.PlayAudioClip(buttonSound);
+
     if (systemState == GameConstants.SystemState.PAUSE_MENU) {
       systemState = GameConstants.SystemState.PLAYING;
       Time.timeScale = 1;
@@ -531,17 +652,23 @@ public partial class Game : MonoBehaviour {
   }
 
   private void BackToGame() {
+    AudioManager.PlayAudioClip(buttonSound);
+
     systemState = GameConstants.SystemState.PLAYING;
     Time.timeScale = 1;
   }
 
   private void Exit() {
+    AudioManager.PlayAudioClip(buttonSound);
+
     Time.timeScale = 1;
     Application.LoadLevel("MainMenu");
   }
 
   private void InitializeGame() {
     Time.timeScale = 0;
+
+    viewingBuildingIndex = viewingTechnologyIndex = -1;
 
     technologyManager = new TechnologyManager();
     technologyManager.Initiate();
@@ -550,30 +677,13 @@ public partial class Game : MonoBehaviour {
 
     GameConstants.ResetModifier();
 
+    InitializeUI();
+
     Time.timeScale = 1;
 
     scoreSubmitted = false;
 
     StartCoroutine(AudioManager.PlayFadeInLoopAudioClip(backgroundMusic, 10.0f));
-
-    buildingList = new List<GameObject>();
-    //buildingListIndexMapping = new Dictionary<GameObject, int>();
-
-    if (initialBuildingList.Count > 0) {
-      for (int i = 0; i < initialBuildingNumber; ++i) {
-        int initialBuildingIndex = Random.Range(0, initialBuildingList.Count);
-        GameObject newBuilding = Instantiate(initialBuildingList[initialBuildingIndex], new Vector3(Random.Range(0, mapWidth * 0.5f) - mapWidth * 0.25f, 1, Random.Range(0, mapHeight * 0.5f) - mapHeight * 0.25f), Quaternion.identity) as GameObject;
-        newBuilding.transform.parent = gameSceneParentTransform;
-
-        GameConstants.BuildingID newBuildingID = newBuilding.GetComponent<CharacterStats>().BuildingID;
-        MessageManager.AddMessage("建造完成 : " + GameConstants.NameOfBuildingID[(int)newBuildingID]);
-
-        buildingList.Add(newBuilding);
-        //buildingListIndexMapping[newBuilding] = i;
-      }
-    }
-
-    isDraggingBuilding = false;
 
     GameObject newZones = Instantiate(zones, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
     newZones.transform.parent = gameSceneParentTransform;

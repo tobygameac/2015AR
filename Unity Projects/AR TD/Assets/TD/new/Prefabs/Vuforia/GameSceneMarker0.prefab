@@ -1680,7 +1680,6 @@ MonoBehaviour:
   buildSound: {fileID: 8300000, guid: a1400e9e8b3e2094ebe8d3a5ea4ce9f9, type: 3}
   errorSound: {fileID: 8300000, guid: f57abb889ead7144f889feef6a0eacb2, type: 3}
   deniedSound: {fileID: 8300000, guid: 09055508e1a4cf34daacd04069ba95e9, type: 3}
-  sellSound: {fileID: 8300000, guid: 3d01cc25c8e9da744be0c7f628a5817c, type: 3}
   researchSound: {fileID: 8300000, guid: 28b0441fc738e9a4bb8091a7fc155b85, type: 3}
   selectedBuildingHighlightObject: {fileID: 108500}
   initialBuildingList:
@@ -1706,11 +1705,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e4618365b5df6439e08cd7109174d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: FrameMarker4
+  mTrackableName: FrameMarker0
   mPreviousScale: {x: 1, y: 1, z: 1}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mMarkerID: -1
+  mMarkerID: 0
 --- !u!124 &12431512
 Behaviour:
   m_ObjectHideFlags: 1
