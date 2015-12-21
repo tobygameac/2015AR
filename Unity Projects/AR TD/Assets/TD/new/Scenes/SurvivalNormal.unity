@@ -896,6 +896,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11492734, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: iconSprites.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 485234, guid: 2c97389569f224741bc261ca55673a74, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -962,7 +966,7 @@ Prefab:
       objectReference: {fileID: 1848472112}
     - target: {fileID: 22418266, guid: 2c97389569f224741bc261ca55673a74, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -270
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 22418266, guid: 2c97389569f224741bc261ca55673a74, type: 2}
       propertyPath: m_LocalScale.x
@@ -1004,6 +1008,42 @@ Prefab:
       propertyPath: changeButtonGameObject
       value: 
       objectReference: {fileID: 1508571456}
+    - target: {fileID: 11492734, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: iconSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 23f6bc7ab815ac94e86e6376d9e0aa71,
+        type: 3}
+    - target: {fileID: 11492734, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: iconSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 13a1eb92f9461684f8ed2b06aa9209df,
+        type: 3}
+    - target: {fileID: 11492734, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: iconSprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5a14c2db68d11c841a3d5bff0ac14237,
+        type: 3}
+    - target: {fileID: 11492734, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: iconSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 13a1eb92f9461684f8ed2b06aa9209df,
+        type: 3}
+    - target: {fileID: 22445608, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 139812, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439828, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439828, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+      propertyPath: m_ReferenceResolution.x
+      value: 960
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c97389569f224741bc261ca55673a74, type: 2}
   m_IsPrefabParent: 0
