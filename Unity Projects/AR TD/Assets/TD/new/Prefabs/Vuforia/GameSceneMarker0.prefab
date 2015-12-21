@@ -61,6 +61,7 @@ GameObject:
   - 33: {fileID: 3368960}
   - 23: {fileID: 2389438}
   - 114: {fileID: 11464464}
+  - 114: {fileID: 11480054}
   m_Layer: 0
   m_Name: GameSceneMarker0
   m_TagString: Untagged
@@ -894,7 +895,7 @@ Transform:
   m_GameObject: {fileID: 181860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 36, y: 48, z: 36}
+  m_LocalScale: {x: 60, y: 60, z: 60}
   m_Children: []
   m_Father: {fileID: 403582}
   m_RootOrder: 0
@@ -1158,8 +1159,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 7159c5f5559087c48a2fa99fbdbfd78b, type: 2}
+  m_Materials: []
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1403,7 +1403,7 @@ MonoBehaviour:
   description: 
   _buildingID: 0
   _enemyID: 0
-  _basicHP: 30
+  _basicHP: 5
   _hPModifier: 0
   _basicDamage: 0
   _damageModifier: 0
@@ -1639,6 +1639,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 162176}
   HPBarImage: {fileID: 169966}
+--- !u!114 &11480054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784c82e7bd8393e4c803cf7ded9fb47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coreFrameMarkerMissingCanvas: {fileID: 0}
 --- !u!114 &11481672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1663,9 +1675,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HUDCanvas: {fileID: 0}
   basicButtonCanvas: {fileID: 0}
+  buildingListCanvas: {fileID: 0}
+  techonologyListCanvas: {fileID: 0}
   pauseMenuCanvas: {fileID: 0}
   audioMenuCanvas: {fileID: 0}
   submitScoreCanvas: {fileID: 0}
+  buildingDetailCanvas: {fileID: 0}
+  technologyDetailCanvas: {fileID: 0}
   buildingStatsCanvas: {fileID: 0}
   nameInputField: {fileID: 0}
   buttonTemplate: {fileID: 144014, guid: ea8b8eccec45fd14d8fa2dc5702730e7, type: 2}
@@ -1682,9 +1698,11 @@ MonoBehaviour:
   deniedSound: {fileID: 8300000, guid: 09055508e1a4cf34daacd04069ba95e9, type: 3}
   researchSound: {fileID: 8300000, guid: 28b0441fc738e9a4bb8091a7fc155b85, type: 3}
   selectedBuildingHighlightObject: {fileID: 108500}
-  initialBuildingList:
+  basicBuildingList:
   - {fileID: 186646, guid: 40e4f0d38a4e0ff4d8fde76e329082a7, type: 2}
-  - {fileID: 186646, guid: 40e4f0d38a4e0ff4d8fde76e329082a7, type: 2}
+  - {fileID: 188834, guid: 03a6216844f979847a81e40aa480fa31, type: 2}
+  - {fileID: 130178, guid: eb0f125e45e80a04f930accea99b83d1, type: 2}
+  - {fileID: 153292, guid: dbc9df9d013a3c741bb5597eb50faed9, type: 2}
   initialBuildingNumber: 0
   maxBuildingNumber: 15
   buildingLayerMask:
