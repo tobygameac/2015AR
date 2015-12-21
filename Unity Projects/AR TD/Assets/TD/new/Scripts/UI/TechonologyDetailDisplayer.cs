@@ -14,7 +14,7 @@ public class TechonologyDetailDisplayer : MonoBehaviour {
   public GameObject TechnologyDetail;
   private Text TechnologyDetailText;
 
-  private Game game;
+  private static Game game;
 
   private Technology previousViewingTechnology;
 
@@ -22,7 +22,9 @@ public class TechonologyDetailDisplayer : MonoBehaviour {
     //TechnologyIconImage = TechnologyIcon.GetComponent<Image>();
     TechnologyDetailText = TechnologyDetail.GetComponent<Text>();
 
-    game = Camera.main.GetComponent<Game>();
+    if (game == null) {
+      game = Camera.main.GetComponent<Game>();
+    }
 
     previousViewingTechnology = null;
   }

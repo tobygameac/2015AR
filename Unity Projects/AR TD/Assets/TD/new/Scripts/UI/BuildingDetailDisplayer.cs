@@ -6,29 +6,39 @@ public class BuildingDetailDisplayer : MonoBehaviour {
 
   public Sprite[] iconSprites;
 
+  public GameObject changeButtonGameObject;
+  private Button changeButton;
+
   public GameObject buildingIcon;
   private Image buildingIconImage;
 
   public GameObject buildingDetail;
   private Text buildingDetailText;
 
-  private Game game;
+  private static Game game;
 
   private int previousViewingBuildingIndex;
+  private GameObject previousSelectedBuilding;
 
   void Start() {
     buildingIconImage = buildingIcon.GetComponent<Image>();
     buildingDetailText = buildingDetail.GetComponent<Text>();
 
-    game = Camera.main.GetComponent<Game>();
+    changeButton = changeButtonGameObject.GetComponent<Button>();
+
+    if (game == null) {
+      game = Camera.main.GetComponent<Game>();
+    }
 
     previousViewingBuildingIndex = -1;
+    previousSelectedBuilding = null;
   }
 
   void Update() {
-    if (previousViewingBuildingIndex != game.ViewingBuildingIndex) {
+    if (previousViewingBuildingIndex != game.ViewingBuildingIndex || previousSelectedBuilding != game.SelectedBuilding) {
       UpdateBuildingDetail();
       previousViewingBuildingIndex = game.ViewingBuildingIndex;
+      previousSelectedBuilding = game.SelectedBuilding;
     }
   }
 
@@ -47,7 +57,19 @@ public class BuildingDetailDisplayer : MonoBehaviour {
 
       buildingDetailText.text += characterStats.description + "</color>\n\n";
 
-      buildingDetailText.text += "<color=red>需要金錢 : </color><color=yellow>" + characterStats.Cost + "</color>\n\n";
+      if (game.SelectedBuilding != null) {
+        int originalCost = game.SelectedBuilding.GetComponent<CharacterStats>().Cost;
+        int need = characterStats.Cost - originalCost;
+        changeButton.interactable = true;
+        if (need >= 0) {
+          buildingDetailText.text += "<color=red>需要金錢 : </color><color=yellow>" + need + "</color>\n\n";
+        } else {
+          buildingDetailText.text += "<color=green>取回金錢 : </color><color=yellow>" + -need + "</color>\n\n";
+        }
+      } else {
+        changeButton.interactable = false;
+
+      }
       /*
       if (characterStats.BuildingID == GameConstants.BuildingID.SLOWING_DEVICE) {
         buildingDetailText.text += "減緩 " + (characterStats.Damage * 100).ToString("0.00") + "% 移動速度\n";
