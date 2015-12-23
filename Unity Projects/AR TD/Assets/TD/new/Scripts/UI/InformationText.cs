@@ -46,7 +46,7 @@ public class InformationText : MonoBehaviour {
     if ((game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
       if (gameManager.GameState == GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE) {
         int remainingTime = (int)(gameManager.RestingTimeBetweenWaves - gameManager.RestedTime);
-        text.text += "<color=black>病菌將於 ";
+        text.text += "<color=black>敵軍將於 ";
         if (remainingTime >= remainingTimeAlertTime) {
           text.text += "<color=blue>";
         } else {
@@ -55,17 +55,17 @@ public class InformationText : MonoBehaviour {
         }
         text.text += remainingTime + "</color> 秒後進行下一波攻勢</color>\n\n";
       } else if (gameManager.GameState == GameConstants.GameState.MIDDLE_OF_THE_WAVE) {
-        text.text += "場上病菌數量 : <color=blue>" + gameManager.NumberOfEnemiesOnMap + "</color>\n";
-        text.text += "尚未出現病菌數量 : <color=blue>" + gameManager.NumberOfEnemiesToGenerate + "</color>\n\n";
+        //text.text += "場上敵軍數量 : <color=blue>" + gameManager.NumberOfEnemiesOnMap + "</color>\n";
+        text.text += "尚未出現敵軍數量 : <color=blue>" + gameManager.NumberOfEnemiesToGenerate + "</color>\n\n";
         int remainingTime = (int)gameManager.RemainingTimeOfCurrentWave;
-        text.text += "<color=black>您必須在 ";
-        if (remainingTime >= remainingTimeAlertTime) {
-          text.text += "<color=red>";
-        } else {
-          int alpha = (int)((Mathf.Sin(Time.time * alertSpeed) + 1) / 2 * 255);
-          text.text += "<color=#ff0000" + alpha.ToString("X2") + ">";
-        }
-        text.text += remainingTime + "</color> 秒內擊退所有病菌</color>\n\n";
+        //text.text += "<color=black>下一波敵軍將於 ";
+        //if (remainingTime >= remainingTimeAlertTime) {
+        //  text.text += "<color=red>";
+        //} else {
+        //  int alpha = (int)((Mathf.Sin(Time.time * alertSpeed) + 1) / 2 * 255);
+        //  text.text += "<color=#ff0000" + alpha.ToString("X2") + ">";
+        //}
+        //text.text += remainingTime + "</color> 秒內入侵</color>\n\n";
       } else if ((gameManager.GameState == GameConstants.GameState.FINISHED) || (gameManager.GameState == GameConstants.GameState.LOSED)) {
         text.text += "遊戲結束\n";
       }

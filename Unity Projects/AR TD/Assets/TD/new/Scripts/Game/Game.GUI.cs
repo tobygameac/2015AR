@@ -88,7 +88,7 @@ public partial class Game : MonoBehaviour {
     }
     AudioManager.PlayAudioClip(buttonSound);
     if (viewingBuildingIndex != i) { // Message spamming
-      MessageManager.AddMessage("請選擇放置區域");
+      MessageManager.AddMessage("請選擇轉換類型");
     }
     viewingBuildingIndex = i;
   }

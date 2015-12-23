@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour {
       GeneratePathArrows(enemyPaths[i], distancePerArrow);
     }
 
-    MessageManager.AddMessage("請建造攻擊裝置抵擋即將入侵的病菌");
+    //MessageManager.AddMessage("請建造攻擊裝置抵擋即將入侵的病菌");
   }
 
   void Update() {
@@ -229,9 +229,10 @@ public class GameManager : MonoBehaviour {
       if (currentWave < maxWave || (game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
         remainingTimeOfCurrentWave -= Time.deltaTime;
         if (remainingTimeOfCurrentWave < 0) {
-          gameState = GameConstants.GameState.LOSED;
-          MessageManager.AddMessage("遊戲結束，請輸入您的名稱將分數登入排行榜");
-          return;
+          //gameState = GameConstants.GameState.LOSED;
+          //MessageManager.AddMessage("遊戲結束，請輸入您的名稱將分數登入排行榜");
+          //return;
+          gameState = GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE;
         }
       }
       if (numberOfEnemiesToGenerate > 0) {
