@@ -862,6 +862,10 @@ Prefab:
       propertyPath: _basicHP
       value: 5000
       objectReference: {fileID: 0}
+    - target: {fileID: 11471780, guid: fc96f8124b40af64b947633c72446b25, type: 2}
+      propertyPath: restingTimeBetweenWaves
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc96f8124b40af64b947633c72446b25, type: 2}
   m_IsPrefabParent: 0

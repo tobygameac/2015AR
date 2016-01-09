@@ -193,6 +193,11 @@ public static class GameConstants {
 
   public static float ADDITIONAL_TIME_BY_LAST_STAND = 0.0f;
 
+  // Boss
+  public static int BOSS_WAVE_OFFSET = 8;
+  public static float BOSS_SCALE = 2.3f;
+  public static float BOSS_SPEED = 0.03f;
+
   public static void ResetModifier() {
     GLOBAL_ENEMY_SPEED_MODIFIER = 0.0f;
   }

@@ -232,22 +232,13 @@ public class GameManager : MonoBehaviour {
           //gameState = GameConstants.GameState.LOSED;
           //MessageManager.AddMessage("遊戲結束，請輸入您的名稱將分數登入排行榜");
           //return;
+          GenerateBosses();
           gameState = GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE;
         }
       }
       if (numberOfEnemiesToGenerate > 0) {
         if (Time.time >= nextGenerateEnemyTime) {
           GenerateEnemies();
-        }
-      } else if (numberOfEnemiesOnMap > 0) {
-        return;
-      } else {
-        if (numberOfEnemiesToGenerate <= 0 && numberOfEnemiesOnMap <= 0) {
-          if (currentWave < maxWave || (game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
-            gameState = GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE;
-          } else {
-            gameState = GameConstants.GameState.FINISHED;
-          }
         }
       }
       return;
@@ -279,6 +270,39 @@ public class GameManager : MonoBehaviour {
         newArrow.transform.parent = game.gameSceneParentTransform;
       }
     }
+  }
+
+  private void GenerateBosses() {
+    int indexRangeOfEnemyToGenerate = CurrentWave + GameConstants.BOSS_WAVE_OFFSET;
+
+    int bossCount = (CurrentWave / 10) + 1;
+
+    for (int bossNumber = 0; bossNumber < bossCount; ++bossNumber) {
+
+      if (waveThresholdForTheNextTypeOfEnemy > 0) {
+        indexRangeOfEnemyToGenerate /= waveThresholdForTheNextTypeOfEnemy;
+        ++indexRangeOfEnemyToGenerate;
+      }
+      if (indexRangeOfEnemyToGenerate > enemyPrefabs.Count) {
+        indexRangeOfEnemyToGenerate = enemyPrefabs.Count;
+      }
+
+      GameObject enemyPrefab = enemyPrefabs[Random.Range(0, indexRangeOfEnemyToGenerate)];
+
+      int enemyPathIndex = Random.Range(0, enemyPaths.Count);
+      EnemyPath enemyPath = enemyPaths[enemyPathIndex];
+      Vector3 spawningPosition = enemyPath.spawningPoints.position;
+
+      GameObject newEnemy = CharacterGenerator.GenerateCharacter(enemyPrefab, spawningPosition, enemyPath.path);
+      newEnemy.transform.parent = game.gameSceneParentTransform;
+
+      EnemyStatsModifier.AddRandomImprovementWithWave(newEnemy, currentWave + GameConstants.BOSS_WAVE_OFFSET);
+      EnemyStatsModifier.ModifyStatsWithWave(newEnemy.GetComponent<CharacterStats>(), currentWave + GameConstants.BOSS_WAVE_OFFSET);
+
+      newEnemy.transform.localScale *= GameConstants.BOSS_SCALE;
+      newEnemy.GetComponent<CharacterStats>().MovingSpeed = GameConstants.BOSS_SPEED;
+    }
+
   }
 
   private void GenerateEnemies() {
@@ -318,6 +342,11 @@ public class GameManager : MonoBehaviour {
     numberOfEnemiesToGenerate = 10 + (currentWave - 1) * 5 * (int)Mathf.Pow(1.1f, currentWave);
     if ((game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
       remainingTimeOfCurrentWave = 45 + ((currentWave - 1) * 5) + GameConstants.ADDITIONAL_TIME_BY_LAST_STAND;
+
+      // AR only
+      remainingTimeOfCurrentWave *= 0.5f;
+      // AR only
+
       GameConstants.ADDITIONAL_TIME_BY_LAST_STAND = 0;
       /* temp */
       /* temp */
@@ -330,6 +359,10 @@ public class GameManager : MonoBehaviour {
     }
 
     timeBetweenGenerateEnemy = (remainingTimeOfCurrentWave / numberOfEnemiesToGenerate) / 3.0f;
+
+    // AR only
+    timeBetweenGenerateEnemy = remainingTimeOfCurrentWave / numberOfEnemiesToGenerate;
+    // AR only
   }
 
 }
