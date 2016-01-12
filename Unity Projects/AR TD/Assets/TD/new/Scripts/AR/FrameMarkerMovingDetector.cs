@@ -5,13 +5,14 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
 
   public float movingSpeedAlertThreshold = 3.0f;
 
-  public float checkTimeGap = 1.0f;
+  public float checkTimeGap = 0.1f;
 
-  private Vector3 lastPosition;
+  public Transform[] markersToTrack;
+  private Vector3[] lastPosition;
 
   private float lastCheckTime;
 
-  private GameObject buildingBelongsToThisFrame;
+  private GameObject[] buildingBelongsToMarkers;
 
   private static Game game;
 
@@ -20,33 +21,53 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
       game = Camera.main.GetComponent<Game>();
     }
 
-    lastPosition = transform.position;
+    lastPosition = new Vector3[markersToTrack.Length];
+    for (int i = 0; i < lastPosition.Length; ++i) {
+      lastPosition[i] = markersToTrack[i].position;
+    }
 
-    lastCheckTime = Time.time;
+    buildingBelongsToMarkers = new GameObject[markersToTrack.Length];
+    for (int i = 0; i < buildingBelongsToMarkers.Length; ++i) {
+      buildingBelongsToMarkers[i] = null;
+    }
+
+      lastCheckTime = Time.time;
   }
 
   void Update() {
     if (Time.time - lastCheckTime >= checkTimeGap) {
 
-      float movingSpeed = Vector3.Distance(transform.position, lastPosition) / Time.deltaTime;
+      float maxMovingSpeed = 0;
+      int maxMovingSpeedIndex = 0;
 
-      if (movingSpeed >= movingSpeedAlertThreshold) {
+      for (int i = 0; i < markersToTrack.Length; ++i) {
 
-        if (buildingBelongsToThisFrame == null) {
-          foreach (Transform childTransform in transform) {
+        float movingSpeed = Vector3.Distance(markersToTrack[i].position, lastPosition[i]) / Time.deltaTime;
+
+        if (movingSpeed > maxMovingSpeed) {
+          maxMovingSpeed = movingSpeed;
+          maxMovingSpeedIndex = i;
+        }
+
+        lastPosition[i] = markersToTrack[i].position;
+      }
+
+      if (maxMovingSpeed >= movingSpeedAlertThreshold) {
+
+        if (buildingBelongsToMarkers[maxMovingSpeedIndex] == null) {
+          foreach (Transform childTransform in markersToTrack[maxMovingSpeedIndex]) {
             if (childTransform.GetComponent<CharacterStats>() != null) {
-              buildingBelongsToThisFrame = childTransform.gameObject;
+              buildingBelongsToMarkers[maxMovingSpeedIndex] = childTransform.gameObject;
               break;
             }
           }
         }
 
-        if (buildingBelongsToThisFrame != null) {
-          game.selectedBuilding = buildingBelongsToThisFrame;
+        if (buildingBelongsToMarkers[maxMovingSpeedIndex] != null) {
+          game.selectedBuilding = buildingBelongsToMarkers[maxMovingSpeedIndex];
         }
       }
 
-      lastPosition = transform.position;
       lastCheckTime = Time.time;
     }
 

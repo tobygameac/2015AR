@@ -38,13 +38,12 @@ public class TechnologyManager {
                       GameConstants.TechnologyID.UPGRADE
                     }
     ));
-    /*
-    technologyList.Add(new Technology(GameConstants.TechnologyID.SELF_HEALING, 1500,
+
+    technologyList.Add(new Technology(GameConstants.TechnologyID.SELF_HEALING, 999999,
                     new GameConstants.TechnologyID[] {
                       GameConstants.TechnologyID.SELF_LEARNING
                     }
     ));
-    */
 
     //technologyList.Add(new Technology(GameConstants.TechnologyID.ADDITIONAL_BUILDING_NUMBER, 10000, true,
     //                new GameConstants.TechnologyID[] {

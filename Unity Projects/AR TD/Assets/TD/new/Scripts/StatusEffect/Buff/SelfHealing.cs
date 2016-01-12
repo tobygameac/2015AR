@@ -4,8 +4,6 @@ using System.Collections;
 [RequireComponent (typeof(CharacterStats))]
 public class SelfHealing : MonoBehaviour {
 
-  public float hpPercentRegeneratePerSecond = GameConstants.HP_PERCENT_REGENERATING_PER_SECOND_OF_SELF_HEALING;
-
   private CharacterStats characterStats;
 
   void Start() {
@@ -20,6 +18,7 @@ public class SelfHealing : MonoBehaviour {
   }
 
   void Update() {
-    characterStats.CurrentHP += characterStats.MaxHP * hpPercentRegeneratePerSecond * Time.deltaTime;
+    characterStats.CurrentHP += characterStats.MaxHP * GameConstants.HP_PERCENT_REGENERATING_PER_SECOND_OF_SELF_HEALING * Time.deltaTime;
   }
+
 }

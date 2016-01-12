@@ -117,7 +117,6 @@ GameObject:
   - 33: {fileID: 3368678}
   - 23: {fileID: 2319256}
   - 114: {fileID: 11469184}
-  - 114: {fileID: 11435096}
   m_Layer: 0
   m_Name: BasicTurretFrameMarker
   m_TagString: Untagged
@@ -634,19 +633,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &11435096
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 170964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 807409db061deb740904b9e4a9d27475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movingSpeedAlertThreshold: 20
-  checkTimeGap: .100000001
 --- !u!114 &11446380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -711,7 +697,7 @@ MonoBehaviour:
   mPreviousScale: {x: 1, y: 1, z: 1}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mMarkerID: -1
+  mMarkerID: 1
 --- !u!114 &11482354
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -88,6 +88,14 @@ public class GameManager : MonoBehaviour {
   }
 
   [SerializeField]
+  private float restingTimeBeforeStart;
+  public float RestingTimeBeforeStart {
+    get {
+      return restingTimeBeforeStart;
+    }
+  }
+
+  [SerializeField]
   private float restingTimeBetweenWaves;
   public float RestingTimeBetweenWaves {
     get {
@@ -205,9 +213,19 @@ public class GameManager : MonoBehaviour {
       return;
     }
 
+    if (coreGameObjectsStats != null && coreGameObjectsStats.Count > 0) {
+      for (int i = 0; i < coreGameObjectsStats.Count; ++i) {
+        if (coreGameObjectsStats[i].CurrentHP <= 0) {
+          gameState = GameConstants.GameState.LOSED;
+          MessageManager.AddMessage("遊戲結束，請輸入您的名稱將分數登入排行榜");
+          return;
+        }
+      }
+    }
+
     if (gameState == GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE) {
       restedTime += Time.deltaTime;
-      if (restedTime >= restingTimeBetweenWaves) {
+      if ((currentWave == 0 && restedTime >= restingTimeBeforeStart) || restedTime >= restingTimeBetweenWaves) {
         NextWave();
         gameState = GameConstants.GameState.MIDDLE_OF_THE_WAVE;
       }
@@ -217,15 +235,6 @@ public class GameManager : MonoBehaviour {
     if (gameState == GameConstants.GameState.MIDDLE_OF_THE_WAVE) {
       remainingTimeOfCurrentWave += GameConstants.ADDITIONAL_TIME_BY_LAST_STAND;
       GameConstants.ADDITIONAL_TIME_BY_LAST_STAND = 0;
-      if (coreGameObjectsStats != null && coreGameObjectsStats.Count > 0) {
-        for (int i = 0; i < coreGameObjectsStats.Count; ++i) {
-          if (coreGameObjectsStats[i].CurrentHP <= 0) {
-            gameState = GameConstants.GameState.LOSED;
-            MessageManager.AddMessage("遊戲結束，請輸入您的名稱將分數登入排行榜");
-            return;
-          }
-        }
-      }
       if (currentWave < maxWave || (game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
         remainingTimeOfCurrentWave -= Time.deltaTime;
         if (remainingTimeOfCurrentWave < 0) {
@@ -265,9 +274,10 @@ public class GameManager : MonoBehaviour {
         continue;
       }
       for (float t = gapT; t < 1; t += gapT) {
-        Vector3 arrowPosition = Vector3.Lerp(path[(i + path.Count - 1) % path.Count], path[i], t) + new Vector3(0, 0.005f, 0);
+        Vector3 arrowPosition = Vector3.Lerp(path[(i + path.Count - 1) % path.Count], path[i], t)/* + new Vector3(0, 0.005f, 0) */;
         GameObject newArrow = Instantiate(pathArrow, arrowPosition, arrowAngle) as GameObject;
         newArrow.transform.parent = game.gameSceneParentTransform;
+        newArrow.transform.localPosition = arrowPosition;
       }
     }
   }
@@ -339,7 +349,8 @@ public class GameManager : MonoBehaviour {
     /* temp */
     /* temp */
     /* temp */
-    numberOfEnemiesToGenerate = 10 + (currentWave - 1) * 5 * (int)Mathf.Pow(1.1f, currentWave);
+    //numberOfEnemiesToGenerate = 10 + (currentWave - 1) * 5 * (int)Mathf.Pow(1.1f, currentWave);
+    numberOfEnemiesToGenerate = 10 + (int)Mathf.Pow(1.2f, currentWave);
     if ((game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
       remainingTimeOfCurrentWave = 45 + ((currentWave - 1) * 5) + GameConstants.ADDITIONAL_TIME_BY_LAST_STAND;
 

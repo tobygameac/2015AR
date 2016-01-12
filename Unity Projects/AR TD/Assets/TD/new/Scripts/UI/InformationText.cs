@@ -46,6 +46,9 @@ public class InformationText : MonoBehaviour {
     if ((game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
       if (gameManager.GameState == GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE) {
         int remainingTime = (int)(gameManager.RestingTimeBetweenWaves - gameManager.RestedTime);
+        if (gameManager.CurrentWave == 0) {
+          remainingTime = (int)(gameManager.RestingTimeBeforeStart - gameManager.RestedTime);
+        }
         text.text += "<color=black>敵軍將於 ";
         if (remainingTime >= remainingTimeAlertTime) {
           text.text += "<color=blue>";

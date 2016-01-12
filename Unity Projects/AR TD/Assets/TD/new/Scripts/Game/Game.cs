@@ -77,10 +77,10 @@ public partial class Game : MonoBehaviour {
       _selectedBuilding = value;
       if (_selectedBuilding != null) {
         _selectedBuilding.GetComponent<CharacterStats>().RangeDisplayer.SetActive(true);
-        selectedBuildingHighlightObject.transform.position = _selectedBuilding.transform.position;
+        //selectedBuildingHighlightObject.transform.position = _selectedBuilding.transform.position;
       }
       buildingStatsCanvas.SetActive(value != null);
-      selectedBuildingHighlightObject.SetActive(value != null);
+      //selectedBuildingHighlightObject.SetActive(value != null);
     }
   }
 
@@ -339,7 +339,13 @@ public partial class Game : MonoBehaviour {
       }
     }
 
-    if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
+    if (Input.GetKeyDown(KeyCode.KeypadEnter)) {
+      if (viewingTechnologyIndex >= 0) {
+        OnResearchButtonClick();
+      }
+    }
+
+      if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
       for (int i = 0; i < basicBuildingList.Count; ++i) {
         if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
           OnBuildingListButtonClick(i);
