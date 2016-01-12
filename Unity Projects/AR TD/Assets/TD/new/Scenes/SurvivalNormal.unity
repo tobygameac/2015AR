@@ -437,7 +437,7 @@ Mesh:
 GameObject:
   m_PrefabParentObject: {fileID: 183290, guid: fc96f8124b40af64b947633c72446b25, type: 2}
   m_PrefabInternal: {fileID: 1429271459}
---- !u!114 &847640534
+--- !u!114 &847640541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 807409db061deb740904b9e4a9d27475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeedAlertThreshold: 3
+  movingSpeedAlertThreshold: 10
   checkTimeGap: .100000001
   markersToTrack:
   - {fileID: 1864588170}
