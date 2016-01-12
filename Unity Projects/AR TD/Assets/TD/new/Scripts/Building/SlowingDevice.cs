@@ -28,7 +28,9 @@ public class SlowingDevice : MonoBehaviour {
 
     GetComponent<SphereCollider>().radius = attackingRange;
     FXParticleSystem = FXObject.GetComponent<ParticleSystem>();
-    FXParticleSystem.startSize *= attackingRange;
+
+    FXParticleSystem.transform.localScale *= attackingRange;
+    //FXParticleSystem.startSize *= attackingRange;
 
     deviceBaseRotating = deviceBase.GetComponent<Rotating>();
 

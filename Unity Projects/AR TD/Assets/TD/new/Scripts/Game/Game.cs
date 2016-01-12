@@ -343,6 +343,10 @@ public partial class Game : MonoBehaviour {
       if (viewingTechnologyIndex >= 0) {
         OnResearchButtonClick();
       }
+
+      if (viewingBuildingIndex >= 0) {
+        OnChangeButtonClick();
+      }
     }
 
       if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
@@ -370,7 +374,7 @@ public partial class Game : MonoBehaviour {
   }
 
   private void ViewBuildingList() {
-    lastHoverBuilding = selectedBuilding = null;
+    //lastHoverBuilding = selectedBuilding = null;
     viewingBuildingIndex = viewingTechnologyIndex = -1;
 
     AudioManager.PlayAudioClip(buttonSound);
@@ -384,7 +388,7 @@ public partial class Game : MonoBehaviour {
   }
 
   private void ViewTechnologyList() {
-    lastHoverBuilding = selectedBuilding = null;
+    //lastHoverBuilding = selectedBuilding = null;
     viewingBuildingIndex = viewingTechnologyIndex = -1;
 
     AudioManager.PlayAudioClip(buttonSound);

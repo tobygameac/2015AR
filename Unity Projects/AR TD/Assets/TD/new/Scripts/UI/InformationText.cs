@@ -60,7 +60,7 @@ public class InformationText : MonoBehaviour {
       } else if (gameManager.GameState == GameConstants.GameState.MIDDLE_OF_THE_WAVE) {
         //text.text += "場上敵軍數量 : <color=blue>" + gameManager.NumberOfEnemiesOnMap + "</color>\n";
         text.text += "尚未出現敵軍數量 : <color=blue>" + gameManager.NumberOfEnemiesToGenerate + "</color>\n\n";
-        int remainingTime = (int)gameManager.RemainingTimeOfCurrentWave;
+        //int remainingTime = (int)gameManager.RemainingTimeOfCurrentWave;
         //text.text += "<color=black>下一波敵軍將於 ";
         //if (remainingTime >= remainingTimeAlertTime) {
         //  text.text += "<color=red>";

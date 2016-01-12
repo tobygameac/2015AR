@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour {
   private List<GameObject> enemyPrefabs;
 
   [SerializeField]
+  private List<GameObject> bossPrefabs;
+
+  [SerializeField]
   private int waveThresholdForTheNextTypeOfEnemy = 5;
 
   private int _currentWave;
@@ -283,21 +286,17 @@ public class GameManager : MonoBehaviour {
   }
 
   private void GenerateBosses() {
-    int indexRangeOfEnemyToGenerate = CurrentWave + GameConstants.BOSS_WAVE_OFFSET;
-
     int bossCount = (CurrentWave / 10) + 1;
 
     for (int bossNumber = 0; bossNumber < bossCount; ++bossNumber) {
 
-      if (waveThresholdForTheNextTypeOfEnemy > 0) {
-        indexRangeOfEnemyToGenerate /= waveThresholdForTheNextTypeOfEnemy;
-        ++indexRangeOfEnemyToGenerate;
-      }
-      if (indexRangeOfEnemyToGenerate > enemyPrefabs.Count) {
-        indexRangeOfEnemyToGenerate = enemyPrefabs.Count;
+      int maximalIndexRangeOfBossToGenerate = CurrentWave / 5;
+
+      if (maximalIndexRangeOfBossToGenerate > bossPrefabs.Count) {
+        maximalIndexRangeOfBossToGenerate = bossPrefabs.Count;
       }
 
-      GameObject enemyPrefab = enemyPrefabs[Random.Range(0, indexRangeOfEnemyToGenerate)];
+      GameObject enemyPrefab = bossPrefabs[Random.Range(0, maximalIndexRangeOfBossToGenerate)];
 
       int enemyPathIndex = Random.Range(0, enemyPaths.Count);
       EnemyPath enemyPath = enemyPaths[enemyPathIndex];
@@ -309,8 +308,8 @@ public class GameManager : MonoBehaviour {
       EnemyStatsModifier.AddRandomImprovementWithWave(newEnemy, currentWave + GameConstants.BOSS_WAVE_OFFSET);
       EnemyStatsModifier.ModifyStatsWithWave(newEnemy.GetComponent<CharacterStats>(), currentWave + GameConstants.BOSS_WAVE_OFFSET);
 
-      newEnemy.transform.localScale *= GameConstants.BOSS_SCALE;
-      newEnemy.GetComponent<CharacterStats>().MovingSpeed = GameConstants.BOSS_SPEED;
+      //newEnemy.transform.localScale *= GameConstants.BOSS_SCALE;
+      //newEnemy.GetComponent<CharacterStats>().MovingSpeed = GameConstants.BOSS_SPEED;
     }
 
   }

@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour {
 
     if (CloseEnoughToCurrentTarget()) {
       currentTargetIndex = (currentTargetIndex + 1) % characterStats.Path.Count;
+      transform.localEulerAngles = Quaternion.LookRotation(characterStats.Path[currentTargetIndex] - transform.localPosition).eulerAngles;
     }
   }
 
