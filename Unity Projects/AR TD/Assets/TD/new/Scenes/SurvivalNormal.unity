@@ -223,6 +223,10 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 349007759}
   m_Script: {fileID: 11500000, guid: d40e1b9172e3a274588d266dac8dc9b4, type: 3}
+--- !u!1 &121699081 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 139812, guid: 2c97389569f224741bc261ca55673a74, type: 2}
+  m_PrefabInternal: {fileID: 1447362715}
 --- !u!1 &198816332 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 168888, guid: 2c97389569f224741bc261ca55673a74, type: 2}
@@ -362,6 +366,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11480054, guid: fc96f8124b40af64b947633c72446b25, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11480054, guid: fc96f8124b40af64b947633c72446b25, type: 2}
+      propertyPath: coreFrameMarkerMissingCanvas
+      value: 
+      objectReference: {fileID: 121699081}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc96f8124b40af64b947633c72446b25, type: 2}
   m_IsPrefabParent: 0

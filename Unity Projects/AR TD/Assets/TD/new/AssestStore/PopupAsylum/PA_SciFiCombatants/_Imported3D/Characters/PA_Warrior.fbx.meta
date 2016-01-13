@@ -79,6 +79,7 @@ ModelImporter:
     7400016: PA_WarriorRecover_Clip
     7400018: PA_WarriorDeath_Clip
     9500000: //RootNode
+    11100000: //RootNode
     13700000: PA_Warrior
   materials:
     importMaterials: 1
@@ -105,7 +106,7 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 1
       lastFrame: 20
-      wrapMode: 0
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
@@ -398,7 +399,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 1
   userData: 
