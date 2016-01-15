@@ -6,11 +6,10 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
   public float movingSpeedAlertThreshold = 3.0f;
 
   public float checkTimeGap = 0.1f;
+  private float lastCheckTime;
 
   public Transform[] markersToTrack;
   private Vector3[] lastPosition;
-
-  private float lastCheckTime;
 
   private GameObject[] buildingBelongsToMarkers;
 
@@ -31,7 +30,7 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
       buildingBelongsToMarkers[i] = null;
     }
 
-      lastCheckTime = Time.time;
+    lastCheckTime = Time.time;
   }
 
   void Update() {
@@ -53,16 +52,9 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
       }
 
       if (maxMovingSpeed >= movingSpeedAlertThreshold) {
-
         if (buildingBelongsToMarkers[maxMovingSpeedIndex] == null) {
-          foreach (Transform childTransform in markersToTrack[maxMovingSpeedIndex]) {
-            if (childTransform.GetComponent<CharacterStats>() != null) {
-              buildingBelongsToMarkers[maxMovingSpeedIndex] = childTransform.gameObject;
-              break;
-            }
-          }
+          GetBuildingBelongsToMarker(maxMovingSpeedIndex);
         }
-
         if (buildingBelongsToMarkers[maxMovingSpeedIndex] != null) {
           game.selectedBuilding = buildingBelongsToMarkers[maxMovingSpeedIndex];
         }
@@ -71,6 +63,15 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
       lastCheckTime = Time.time;
     }
 
+  }
+
+  void GetBuildingBelongsToMarker(int markerIndex) {
+    foreach (Transform childTransform in markersToTrack[markerIndex]) {
+      if (childTransform.GetComponent<CharacterStats>() != null) {
+        buildingBelongsToMarkers[markerIndex] = childTransform.gameObject;
+        return;
+      }
+    }
   }
 
 }

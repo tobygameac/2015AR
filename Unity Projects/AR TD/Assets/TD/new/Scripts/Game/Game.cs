@@ -525,8 +525,8 @@ public partial class Game : MonoBehaviour {
     GameObject newBuilding = CombinationTable.GetCombinationObject(buildingID1, buildingID2);
     if (newBuilding != null) {
       if (buildingStats1.NextLevel != null || buildingStats2.NextLevel != null) {
-        AudioManager.PlayAudioClip(errorSound);
-        MessageManager.AddMessage("需將兩個裝置都升級到最高等級才能進行組合");
+        //AudioManager.PlayAudioClip(errorSound);
+        //MessageManager.AddMessage("需將兩個裝置都升級到最高等級才能進行組合");
         return false;
       }
 
