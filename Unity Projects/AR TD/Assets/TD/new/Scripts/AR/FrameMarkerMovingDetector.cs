@@ -36,12 +36,15 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
   void Update() {
     if (Time.time - lastCheckTime >= checkTimeGap) {
 
+      float averageMovingSpeed = 0;
+
       float maxMovingSpeed = 0;
       int maxMovingSpeedIndex = 0;
 
       for (int i = 0; i < markersToTrack.Length; ++i) {
 
         float movingSpeed = Vector3.Distance(markersToTrack[i].position, lastPosition[i]) / Time.deltaTime;
+        averageMovingSpeed += movingSpeed / (float)markersToTrack.Length;
 
         if (movingSpeed > maxMovingSpeed) {
           maxMovingSpeed = movingSpeed;
@@ -51,7 +54,7 @@ public class FrameMarkerMovingDetector : MonoBehaviour {
         lastPosition[i] = markersToTrack[i].position;
       }
 
-      if (maxMovingSpeed >= movingSpeedAlertThreshold) {
+      if ((maxMovingSpeed - averageMovingSpeed) >= movingSpeedAlertThreshold) {
         if (buildingBelongsToMarkers[maxMovingSpeedIndex] == null) {
           GetBuildingBelongsToMarker(maxMovingSpeedIndex);
         }

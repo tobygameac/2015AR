@@ -39,7 +39,7 @@ public class CombinationTable : MonoBehaviour {
     combinationTable[(int)GameConstants.BuildingID.BURNING_DEVICE][(int)GameConstants.BuildingID.SLOWING_DEVICE] = fireStormDevice;
 
     combinationTable[(int)GameConstants.BuildingID.LASER_DEVICE][(int)GameConstants.BuildingID.LASER_DEVICE] = superLaserDevice;
-    combinationTable[(int)GameConstants.BuildingID.LASER_DEVICE][(int)GameConstants.BuildingID.SLOWING_DEVICE] = speedingDevice;
+    //combinationTable[(int)GameConstants.BuildingID.LASER_DEVICE][(int)GameConstants.BuildingID.SLOWING_DEVICE] = speedingDevice;
 
     combinationTable[(int)GameConstants.BuildingID.SUPER_TURRET][(int)GameConstants.BuildingID.SUPER_TURRET] = ultimateTurret;
     combinationTable[(int)GameConstants.BuildingID.FIRE_TURRET][(int)GameConstants.BuildingID.FIRE_TURRET] = superFireTurret;

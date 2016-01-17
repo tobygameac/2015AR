@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 807409db061deb740904b9e4a9d27475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeedAlertThreshold: 10
+  movingSpeedAlertThreshold: 5
   checkTimeGap: .100000001
   markersToTrack:
   - {fileID: 1864588170}
