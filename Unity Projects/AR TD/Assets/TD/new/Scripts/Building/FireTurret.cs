@@ -16,8 +16,8 @@ public class FireTurret : MonoBehaviour {
   public float attackingAngleForEachMuzzle;
 
   public float turningSpeed;
-  public float warmingUpTime;
-  private float nextAttackTime;
+  //public float warmingUpTime;
+  //private float nextAttackTime;
 
   private float attackingRange;
   private float attackingSpeed;
@@ -56,7 +56,7 @@ public class FireTurret : MonoBehaviour {
       noTargetTime = 0;
       for (int i = 0; i < FXParticleSystem.Length; ++i) {
         if (FXParticleSystem[i].isStopped) {
-          nextAttackTime = Time.time + warmingUpTime;
+          //nextAttackTime = Time.time + warmingUpTime;
           FXParticleSystem[i].Play();
         }
       }
@@ -84,25 +84,25 @@ public class FireTurret : MonoBehaviour {
       if (target == null) {
         target = collider.transform;
       }
-      if (Time.time >= nextAttackTime) {
-        for (int i = 0; i < muzzles.Length; ++i) {
-          Quaternion desiredRotation = Quaternion.LookRotation(collider.transform.position - muzzleBase.position);
-          desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y, muzzleBase.localEulerAngles.z); // y-axis only
-          float angleToEnemy = Quaternion.Angle(muzzleBase.localRotation, desiredRotation);
-          if (angleToEnemy <= attackingAngleForEachMuzzle / 2) {
-            target = collider.transform;
-            CharacterStats targetCharacterStats = collider.GetComponent<CharacterStats>();
-            targetCharacterStats.CurrentHP -= characterStats.Damage * attackingSpeed * Time.deltaTime;
-            if (targetCharacterStats.CurrentHP <= 0) {
-              ++characterStats.UnitKilled;
-              if (game.HasTechnology(GameConstants.TechnologyID.SELF_LEARNING)) {
-                characterStats.DamageModifier += GameConstants.SELF_LEARNING_IMPROVEMENT_PERCENT_PER_KILL;
-              } else {
-              }
+      //if (Time.time >= nextAttackTime) {
+      for (int i = 0; i < muzzles.Length; ++i) {
+        Quaternion desiredRotation = Quaternion.LookRotation(collider.transform.position - muzzleBase.position);
+        desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y, muzzleBase.localEulerAngles.z); // y-axis only
+        float angleToEnemy = Quaternion.Angle(muzzleBase.localRotation, desiredRotation);
+        if (angleToEnemy <= attackingAngleForEachMuzzle / 2) {
+          target = collider.transform;
+          CharacterStats targetCharacterStats = collider.GetComponent<CharacterStats>();
+          targetCharacterStats.CurrentHP -= characterStats.Damage * attackingSpeed * Time.deltaTime;
+          if (targetCharacterStats.CurrentHP <= 0) {
+            ++characterStats.UnitKilled;
+            if (game.HasTechnology(GameConstants.TechnologyID.SELF_LEARNING)) {
+              characterStats.DamageModifier += GameConstants.SELF_LEARNING_IMPROVEMENT_PERCENT_PER_KILL;
+            } else {
             }
           }
         }
       }
+      //}
     }
   }
 

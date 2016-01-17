@@ -59,11 +59,11 @@ public class EnemyStatsModifier : MonoBehaviour {
       return;
     }
 
-    dice = Random.Range(0.0f, 1.0f);
-    if (dice < GameConstants.PROBABILITY_OF_CELL_DIVISION * probabilityScale) {
-      characterStats.Cost = (int)(characterStats.Cost * GameConstants.COST_SCALE_OF_CELL_DIVISION);
-      targetCharacter.AddComponent<CellDivision>();
-      return;
-    }
+    //dice = Random.Range(0.0f, 1.0f);
+    //if (dice < GameConstants.PROBABILITY_OF_CELL_DIVISION * probabilityScale) {
+    //  characterStats.Cost = (int)(characterStats.Cost * GameConstants.COST_SCALE_OF_CELL_DIVISION);
+    //  targetCharacter.AddComponent<CellDivision>();
+    //  return;
+    //}
   }
 }

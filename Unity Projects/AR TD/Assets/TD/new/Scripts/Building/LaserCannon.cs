@@ -50,8 +50,13 @@ public class LaserCannon : MonoBehaviour {
   void Update() {
     if (target != null) {
       Quaternion desiredRotation = Quaternion.LookRotation(target.position - turretBall.position);
-      turretBall.rotation = Quaternion.Slerp(turretBall.rotation, desiredRotation, Time.deltaTime * turningSpeed);
-      if (Time.time >= nextFireTime) {
+      desiredRotation.eulerAngles = new Vector3(turretBall.localEulerAngles.x, desiredRotation.eulerAngles.y, turretBall.localEulerAngles.z); // y-axis only
+
+      turretBall.localRotation = Quaternion.Slerp(turretBall.localRotation, desiredRotation, Time.deltaTime * turningSpeed);
+
+      float angleToEnemy = Quaternion.Angle(turretBall.localRotation, desiredRotation);
+
+      if (Time.time >= nextFireTime && angleToEnemy <= 5) {
         FireProjectile();
       }
     }
