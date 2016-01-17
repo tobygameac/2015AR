@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: tobygameac
-  productName: NanoTD
+  productName: TreasureDefender
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -165,7 +165,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 0}
+      m_Icon: {fileID: 2800000, guid: 326d584efaf4f2c449b3a3b7657a698a, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []

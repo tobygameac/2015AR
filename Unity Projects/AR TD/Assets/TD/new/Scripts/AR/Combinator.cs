@@ -3,21 +3,27 @@ using System.Collections;
 
 public class Combinator : MonoBehaviour {
 
-  public float combinationDistance = 2.0f;
+  public float combinationDistance = 1.5f;
 
   public float checkTimeGap = 0.1f;
   private float lastCheckTime;
 
-  public GameObject combinationFX;
+  public GameObject combinationFXObject;
+  private ParticleSystem combinationParticleSystem;
 
   public Transform[] markersToTrack;
   private GameObject[] buildingBelongsToMarkers;
 
   private static Game game;
+  private bool hasCombinationTechnology;
 
   void Start() {
     if (game == null) {
       game = Camera.main.GetComponent<Game>();
+    }
+
+    if (combinationFXObject != null) {
+      combinationParticleSystem = combinationFXObject.GetComponent<ParticleSystem>();
     }
 
     buildingBelongsToMarkers = new GameObject[markersToTrack.Length];
@@ -25,37 +31,45 @@ public class Combinator : MonoBehaviour {
       buildingBelongsToMarkers[i] = null;
     }
 
+    hasCombinationTechnology = false;
+
     lastCheckTime = Time.time;
   }
 
   void Update() {
     if (Time.time - lastCheckTime >= checkTimeGap) {
 
-      double minDistance = 2e9;
-      int minI = 0, minJ = 0;
+      if (!hasCombinationTechnology) {
+        hasCombinationTechnology = game.HasTechnology(GameConstants.TechnologyID.COMBINATE);
+      }
+
+      if (!hasCombinationTechnology) {
+        return;
+      }
+
       for (int i = 0; i < markersToTrack.Length; ++i) {
         for (int j = i + 1; j < markersToTrack.Length; ++j) {
           double markerDistance = Vector3.Distance(markersToTrack[i].position, markersToTrack[j].position);
-          if (markerDistance < minDistance) {
-            minDistance = markerDistance;
-            minI = i;
-            minJ = j;
-          }
-        }
-      }
+          if (markerDistance < combinationDistance) {
+            if (buildingBelongsToMarkers[i] == null) {
+              GetBuildingBelongsToMarker(i);
+            }
+            if (buildingBelongsToMarkers[j] == null) {
+              GetBuildingBelongsToMarker(j);
+            }
 
-      if (minDistance < combinationDistance) {
-        if (buildingBelongsToMarkers[minI] == null) {
-          GetBuildingBelongsToMarker(minI);
-        }
-        if (buildingBelongsToMarkers[minJ] == null) {
-          GetBuildingBelongsToMarker(minJ);
-        }
-
-        if (buildingBelongsToMarkers[minI] != null && buildingBelongsToMarkers[minJ] != null) {
-          bool combinationSuccess = game.CombinateBuilding(buildingBelongsToMarkers[minI], buildingBelongsToMarkers[minJ]);
-          if (combinationSuccess) {
-
+            if (buildingBelongsToMarkers[i] != null && buildingBelongsToMarkers[j] != null) {
+              bool combinationSuccess = game.CombinateBuilding(buildingBelongsToMarkers[i], buildingBelongsToMarkers[j]);
+              if (combinationSuccess) {
+                lastCheckTime = Time.time;
+                if (combinationParticleSystem != null) {
+                  //combinationFXObject.transform.position = (buildingBelongsToMarkers[i].transform.position + buildingBelongsToMarkers[j].transform.position) * 0.5f;
+                  combinationFXObject.transform.position = buildingBelongsToMarkers[i].transform.position;
+                  combinationParticleSystem.Play();
+                }
+                return;
+              }
+            }
           }
         }
       }

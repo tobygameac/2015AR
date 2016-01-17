@@ -577,8 +577,8 @@ public partial class Game : MonoBehaviour {
 
       return true;
     }
-    AudioManager.PlayAudioClip(errorSound);
-    MessageManager.AddMessage("無法將 " + GameConstants.NameOfBuildingID[(int)buildingID1] + " 與 " + GameConstants.NameOfBuildingID[(int)buildingID2] + " 進行組合");
+    //AudioManager.PlayAudioClip(errorSound);
+    //MessageManager.AddMessage("無法將 " + GameConstants.NameOfBuildingID[(int)buildingID1] + " 與 " + GameConstants.NameOfBuildingID[(int)buildingID2] + " 進行組合");
     return false;
   }
 
