@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 412760}
   - 114: {fileID: 11435084}
+  - 114: {fileID: 11455240}
   m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
@@ -63,11 +64,31 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152156}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb2dec4a84474fb42ada66832c23fc30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingMagnitude: .100000001
+  floatingSpeed: 2
+--- !u!114 &11455240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda2a34a7a1b5b34a8e7afaaf6be2607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 129782}
+  sprites:
+  - {fileID: 21300000, guid: 84721c728a5ba734587ed55a44e24582, type: 3}
+  - {fileID: 21300000, guid: 79a2f14ddae4fc84f8718a6bbef23662, type: 3}
+  - {fileID: 21300000, guid: 5d4b20709dee8d94b934089a421bbf78, type: 3}
+  - {fileID: 21300000, guid: 0880059b899bfb84a8b698802eeae15e, type: 3}
+  - {fileID: 21300000, guid: 8f8c9412899ceda4a9742a7626f011e7, type: 3}
   floatingMagnitude: .100000001
   floatingSpeed: 2
 --- !u!212 &21214966
@@ -96,7 +117,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 306378ef8fad42243a8aee93fb5fe53d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84721c728a5ba734587ed55a44e24582, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .501960814}
 --- !u!1001 &100100000
 Prefab:
