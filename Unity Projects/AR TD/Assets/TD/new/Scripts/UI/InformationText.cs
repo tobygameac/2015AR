@@ -25,7 +25,7 @@ public class InformationText : MonoBehaviour {
 
     List<CharacterStats> coreGameObjectsStats = gameManager.CoreGameObjectsStats;
     for (int i = 0; i < coreGameObjectsStats.Count; ++i) {
-      text.text += "<size=20>核心生命 : <color=red>" + coreGameObjectsStats[i].CurrentHP + "</color> / <color=red>" + coreGameObjectsStats[i].MaxHP + "</color></size>\n\n";
+      text.text += "<size=20>寶箱生命 : <color=red>" + coreGameObjectsStats[i].CurrentHP + "</color> / <color=red>" + coreGameObjectsStats[i].MaxHP + "</color></size>\n\n";
     }
 
     text.text += "金錢 : <color=yellow>" + game.Money + "</color>\n";

@@ -1488,7 +1488,7 @@ MonoBehaviour:
   _damageModifier: 0
   _basicAttackingSpeed: 0
   _attackingSpeedModifier: 0
-  _basicMovingSpeed: 3.5
+  _basicMovingSpeed: .150000006
   _movingSpeedModifier: 0
   _cost: 50
   _attackingRange: 0
@@ -1744,7 +1744,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: _basicMovingSpeed
-      value: 3.5
+      value: .150000006
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _cost

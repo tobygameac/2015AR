@@ -122,7 +122,7 @@ public static class GameConstants {
         _detailOfTechnologyID[(int)TechnologyID.SELF_LEARNING] = "裝置將根據擊殺數來增強攻擊力，每個擊殺數增加 ";
         _detailOfTechnologyID[(int)TechnologyID.SELF_LEARNING] += (SELF_LEARNING_IMPROVEMENT_PERCENT_PER_KILL * 100).ToString("0.00") + "% 傷害";
 
-        _detailOfTechnologyID[(int)TechnologyID.SELF_HEALING] = "核心將隨時間快速恢復生命值";
+        _detailOfTechnologyID[(int)TechnologyID.SELF_HEALING] = "寶箱將隨時間快速恢復生命值";
         _detailOfTechnologyID[(int)TechnologyID.ADDITIONAL_BUILDING_NUMBER] = "增加 " + ADDITIONAL_BUILDING_NUMBER_PER_RESEARCH + " 個最大可建裝置數量";
 
         _detailOfTechnologyID[(int)TechnologyID.FREEZING_LEVEL1] = "場上敵軍減慢 ";

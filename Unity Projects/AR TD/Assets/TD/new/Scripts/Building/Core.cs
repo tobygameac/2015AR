@@ -44,7 +44,7 @@ public class Core : MonoBehaviour {
       //CharacterStats targetCharacterStats = collider.GetComponent<CharacterStats>();
       //targetCharacterStats.CurrentHP = 0;
       Destroy(collider.gameObject);
-      MessageManager.AddMessage("核心受到攻擊");
+      MessageManager.AddMessage("寶箱受到攻擊");
 
       AudioManager.PlayAudioClip(damagedSound);
 
