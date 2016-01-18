@@ -510,7 +510,8 @@ public partial class Game : MonoBehaviour {
 
       Destroy(buildingToChange);
 
-      viewingBuildingIndex = -1;
+      //viewingBuildingIndex = -1;
+      viewingBuildingIndex = 0;
 
       return true;
     }
