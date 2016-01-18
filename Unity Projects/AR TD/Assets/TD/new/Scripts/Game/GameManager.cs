@@ -244,8 +244,11 @@ public class GameManager : MonoBehaviour {
           //gameState = GameConstants.GameState.LOSED;
           //MessageManager.AddMessage("遊戲結束，請輸入您的名稱將分數登入排行榜");
           //return;
-          GenerateBosses();
           gameState = GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE;
+          if (currentWave % 3 == 0) {
+            GenerateBosses();
+            MessageManager.AddMessage("BOSS入侵");
+          }
         }
       }
       if (numberOfEnemiesToGenerate > 0) {
