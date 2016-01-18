@@ -569,7 +569,7 @@ public partial class Game : MonoBehaviour {
       }
 
       // Build new building on the position of building 1
-      newBuilding = Instantiate(newBuilding, building1.transform.position/* + new Vector3(0, 1, 0) */, Quaternion.identity) as GameObject;
+      newBuilding = Instantiate(newBuilding, building1.transform.position/* + new Vector3(0, 1, 0) */, building1.transform.rotation/*Quaternion.identity*/) as GameObject;
 
       newBuilding.transform.parent = building1.transform.parent;
 
@@ -585,7 +585,7 @@ public partial class Game : MonoBehaviour {
 
       // Replace building 2 as a basic building
       int basicBuildingIndex = Random.Range(0, basicBuildingList.Count);
-      GameObject replacedBuilding = Instantiate(basicBuildingList[basicBuildingIndex], building2.transform.position, Quaternion.identity) as GameObject;
+      GameObject replacedBuilding = Instantiate(basicBuildingList[basicBuildingIndex], building2.transform.position, building2.transform.rotation/*Quaternion.identity*/) as GameObject;
 
       replacedBuilding.transform.parent = building2.transform.parent;
 
