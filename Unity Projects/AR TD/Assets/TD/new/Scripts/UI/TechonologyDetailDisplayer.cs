@@ -6,21 +6,19 @@ public class TechonologyDetailDisplayer : MonoBehaviour {
 
   public Sprite[] iconSprites;
 
-  /*
-  public GameObject TechnologyIcon;
-  private Image TechnologyIconImage;
-  */
+  public GameObject technologyIcon;
+  private Image technologyIconImage;
 
-  public GameObject TechnologyDetail;
-  private Text TechnologyDetailText;
+  public GameObject technologyDetail;
+  private Text technologyDetailText;
 
   private static Game game;
 
   private Technology previousViewingTechnology;
 
   void Start() {
-    //TechnologyIconImage = TechnologyIcon.GetComponent<Image>();
-    TechnologyDetailText = TechnologyDetail.GetComponent<Text>();
+    technologyIconImage = technologyIcon.GetComponent<Image>();
+    technologyDetailText = technologyDetail.GetComponent<Text>();
 
     if (game == null) {
       game = Camera.main.GetComponent<Game>();
@@ -38,14 +36,16 @@ public class TechonologyDetailDisplayer : MonoBehaviour {
 
   void UpdateTechnologyDetail() {
     if (game.ViewingTechnology != null) {
-      //TechnologyIconImage.sprite = iconSprites[(int)game.ViewingTechnology.ID];
+      if (iconSprites.Length > (int)game.ViewingTechnology.ID) {
+        technologyIconImage.sprite = iconSprites[(int)game.ViewingTechnology.ID];
+      }
 
-      TechnologyDetailText.text = "需要金錢 : <color=yellow>" + game.ViewingTechnology.Cost + "</color>\n";
-      TechnologyDetailText.text += "<color=lime>" + GameConstants.DetailOfTechnologyID[(int)game.ViewingTechnology.ID] + "</color>";
+      technologyDetailText.text = "需要金錢 : <color=yellow>" + game.ViewingTechnology.Cost + "</color>\n";
+      technologyDetailText.text += "<color=lime>" + GameConstants.DetailOfTechnologyID[(int)game.ViewingTechnology.ID] + "</color>";
 
     } else {
-      //TechnologyIconImage.sprite = null;
-      TechnologyDetailText.text = "";
+      technologyIconImage.sprite = null;
+      technologyDetailText.text = "";
     }
   }
 }

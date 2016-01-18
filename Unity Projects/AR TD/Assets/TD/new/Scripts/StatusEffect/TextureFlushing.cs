@@ -7,7 +7,7 @@ public class TextureFlushing : MonoBehaviour
     public GameObject icon;
     private SpriteRenderer iconImg;
 
-    public Sprite[] sprites = new Sprite[5];
+    public Sprite[] sprites;
 
     public float floatingMagnitude;
     public float floatingSpeed;

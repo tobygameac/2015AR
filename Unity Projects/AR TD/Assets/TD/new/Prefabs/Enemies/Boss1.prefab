@@ -1761,7 +1761,7 @@ MonoBehaviour:
   description: 
   _buildingID: 0
   _enemyID: 0
-  _basicHP: 300
+  _basicHP: 200
   _hPModifier: 0
   _basicDamage: 0
   _damageModifier: 0
@@ -2036,7 +2036,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: _basicHP
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 183818}
