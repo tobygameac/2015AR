@@ -214,8 +214,11 @@ public partial class Game : MonoBehaviour {
       return;
     }
 
-    if (_selectedBuilding != null) {
-      selectedBuildingHighlightObject.transform.position = _selectedBuilding.transform.position;
+    if (selectedBuilding != null) {
+      //selectedBuildingHighlightObject.transform.position = _selectedBuilding.transform.position;
+      if (!selectedBuilding.GetComponent<Collider>().enabled) {
+        selectedBuilding = null;
+      }
     }
 
     //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -349,7 +352,7 @@ public partial class Game : MonoBehaviour {
       }
     }
 
-      if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
+    if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
       for (int i = 0; i < basicBuildingList.Count; ++i) {
         if (Input.GetKeyDown(KeyCode.Keypad1 + i) || Input.GetKeyUp(KeyCode.Alpha1 + i)) {
           OnBuildingListButtonClick(i);

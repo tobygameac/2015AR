@@ -123,12 +123,12 @@ public class GameManager : MonoBehaviour {
       game.gameState = value;
       if (value == GameConstants.GameState.WAIT_FOR_THE_NEXT_WAVE) {
         restedTime = 0;
-        MessageManager.AddMessage("第 " + (currentWave + 1) + " 波病菌將於 " + (int)(restingTimeBetweenWaves) + " 秒後入侵");
+        MessageManager.AddMessage("第 " + (currentWave + 1) + " 波敵軍將於 " + (int)(restingTimeBetweenWaves) + " 秒後入侵");
         if ((game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
           if (currentWave > 0) {
             int speedBonus = (int)remainingTimeOfCurrentWave * currentWave * currentWave;
             score += speedBonus;
-            MessageManager.AddMessage("成功擊退第" + currentWave + "波病菌\n剩餘秒數 : " + (int)remainingTimeOfCurrentWave + "\n快速擊退加分 : " + speedBonus);
+            MessageManager.AddMessage("成功擊退第" + currentWave + "波敵軍\n剩餘秒數 : " + (int)remainingTimeOfCurrentWave + "\n快速擊退加分 : " + speedBonus);
           }
         }
       }
@@ -208,7 +208,7 @@ public class GameManager : MonoBehaviour {
       GeneratePathArrows(enemyPaths[i], distancePerArrow);
     }
 
-    //MessageManager.AddMessage("請建造攻擊裝置抵擋即將入侵的病菌");
+    //MessageManager.AddMessage("請建造攻擊裝置抵擋即將入侵的敵軍");
   }
 
   void Update() {

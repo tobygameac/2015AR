@@ -56,8 +56,9 @@ public class UpgradeCombinateButtonHandler : MonoBehaviour {
       if (hasCombinateTechnology && building != null) {
         characterStats = building.GetComponent<CharacterStats>();
         if (characterStats.NextLevel == null) {
-          upgradeButtonObject.SetActive(false);
-          combinateButtonObject.SetActive(true);
+          //upgradeButtonObject.SetActive(false);
+          //combinateButtonObject.SetActive(true);
+          upgradeButtonText.text = "將兩座建築貼近進行組合";
         }
       }
     }
@@ -77,11 +78,13 @@ public class UpgradeCombinateButtonHandler : MonoBehaviour {
         upgradeButton.interactable = false;
         string combinateTechnologyName = GameConstants.NameOfTechnologyID[(int)GameConstants.TechnologyID.COMBINATE];
         upgradeButtonText.text = "需研發" + combinateTechnologyName + "";
-
         if (hasCombinateTechnology) {
-          upgradeButtonObject.SetActive(false);
-          combinateButtonObject.SetActive(true);
+          upgradeButtonText.text = "將兩座建築貼近進行組合";
         }
+        //if (hasCombinateTechnology) {
+        //  upgradeButtonObject.SetActive(false);
+        //  combinateButtonObject.SetActive(true);
+        //}
       }
     }
 

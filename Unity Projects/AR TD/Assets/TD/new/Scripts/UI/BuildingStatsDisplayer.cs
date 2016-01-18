@@ -52,7 +52,7 @@ public class BuildingStatsDisplayer : MonoBehaviour {
     } else if (characterStats.BuildingID == GameConstants.BuildingID.SPEEDING_DEVICE) {
       buildingStatsText.text += "<color=brown>增加移動速度 : </color><color=blue>" + (-characterStats.Damage * 100).ToString("0.00") + "%\n";
     } else if (characterStats.BuildingID == GameConstants.BuildingID.WEAKENING_DEVICE) {
-      buildingStatsText.text += "<color=brown>降低病菌最大生命 : </color><color=blue>" + (characterStats.Damage * 100).ToString("0.00") + "%\n";
+      buildingStatsText.text += "<color=brown>降低敵軍最大生命 : </color><color=blue>" + (characterStats.Damage * 100).ToString("0.00") + "%\n";
     } else if (characterStats.BuildingID == GameConstants.BuildingID.FIRE_STORM_DEVICE) {
       float damageScale = building.GetComponent<FireStormDevice>().DamageScale;
       buildingStatsText.text += "<color=brown>減緩移動速度 : </color><color=blue>" + (characterStats.Damage * 100).ToString("0.00") + "%</color>";

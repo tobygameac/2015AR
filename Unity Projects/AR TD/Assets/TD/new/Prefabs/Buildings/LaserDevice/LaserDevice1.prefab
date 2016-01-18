@@ -469,9 +469,9 @@ MonoBehaviour:
   _enemyID: 0
   _basicHP: 0
   _hPModifier: 0
-  _basicDamage: 100
+  _basicDamage: 300
   _damageModifier: 0
-  _basicAttackingSpeed: .5
+  _basicAttackingSpeed: .300000012
   _attackingSpeedModifier: 0
   _basicMovingSpeed: 0
   _movingSpeedModifier: 0
@@ -1647,7 +1647,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _basicDamage
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _cost
@@ -1683,7 +1683,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _basicAttackingSpeed
-      value: .5
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString

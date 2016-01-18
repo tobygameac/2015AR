@@ -89,7 +89,8 @@ public class SuperFireTurret : MonoBehaviour {
       if (Time.time >= nextAttackTime) {
         for (int i = 0; i < muzzles.Length; ++i) {
           Quaternion desiredRotation = Quaternion.LookRotation(collider.transform.position - muzzleBase.position);
-          float angleFromMuzzleToEnemy = Quaternion.Angle(muzzles[i].rotation, desiredRotation);
+          desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y, muzzleBase.localEulerAngles.z); // y-axis only
+          float angleFromMuzzleToEnemy = Quaternion.Angle(muzzles[i].localRotation, desiredRotation);
           if (angleFromMuzzleToEnemy <= attackingAngleForEachMuzzle / 2) {
             CharacterStats targetCharacterStats = collider.GetComponent<CharacterStats>();
             targetCharacterStats.CurrentHP -= characterStats.Damage * attackingSpeed * Time.deltaTime;
