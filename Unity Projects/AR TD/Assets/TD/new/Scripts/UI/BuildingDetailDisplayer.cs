@@ -52,10 +52,9 @@ public class BuildingDetailDisplayer : MonoBehaviour {
         buildingIconImage.sprite = iconSprites[iconSprites.Length - 1];
       }
 
-      buildingDetailText.text = "<color=lime>";
-      //buildingDetailText.text += GameConstants.NameOfBuildingID[(int)characterStats.BuildingID] + "\n\n";
+      buildingDetailText.text = "<color=orange>" + GameConstants.NameOfBuildingID[(int)characterStats.BuildingID] + "</color>\n\n";
 
-      buildingDetailText.text += characterStats.description + "</color>\n\n";
+      buildingDetailText.text += "<color=lime>" + characterStats.description + "</color>\n\n";
 
       if (game.SelectedBuilding != null) {
         int originalCost = game.SelectedBuilding.GetComponent<CharacterStats>().Cost;

@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 432088}
   - 198: {fileID: 19874742}
   - 199: {fileID: 19902516}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire Spray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - 4: {fileID: 418992}
   - 198: {fileID: 19864466}
   - 199: {fileID: 19921098}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - 4: {fileID: 405196}
   - 198: {fileID: 19819294}
   - 199: {fileID: 19916120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire Spray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - 4: {fileID: 436878}
   - 198: {fileID: 19877106}
   - 199: {fileID: 19996098}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire Spray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - 4: {fileID: 419010}
   - 198: {fileID: 19839880}
   - 199: {fileID: 19902428}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - 4: {fileID: 441912}
   - 198: {fileID: 19823202}
   - 199: {fileID: 19903030}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - 4: {fileID: 465554}
   - 198: {fileID: 19832786}
   - 199: {fileID: 19956364}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - 4: {fileID: 459706}
   - 198: {fileID: 19874928}
   - 199: {fileID: 19992912}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - 4: {fileID: 439788}
   - 198: {fileID: 19882806}
   - 199: {fileID: 19990660}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fire Spray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - 4: {fileID: 487142}
   - 198: {fileID: 19808664}
   - 199: {fileID: 19987406}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ GameObject:
   - 4: {fileID: 479536}
   - 198: {fileID: 19850478}
   - 199: {fileID: 19966928}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   - 4: {fileID: 444986}
   - 198: {fileID: 19856484}
   - 199: {fileID: 19941572}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13796,6 +13796,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: _attackingRange
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

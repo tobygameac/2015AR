@@ -153,6 +153,18 @@ Prefab:
       propertyPath: m_Color.a
       value: .784313738
       objectReference: {fileID: 0}
+    - target: {fileID: 11475618, guid: 5d2d7eb653a0e3641bed1eb24ac1a8d3, type: 2}
+      propertyPath: m_ReferenceResolution.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475618, guid: 5d2d7eb653a0e3641bed1eb24ac1a8d3, type: 2}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22411516, guid: 5d2d7eb653a0e3641bed1eb24ac1a8d3, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d2d7eb653a0e3641bed1eb24ac1a8d3, type: 2}
   m_IsPrefabParent: 0
@@ -213,8 +225,8 @@ Camera:
   m_GameObject: {fileID: 1507641469}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0

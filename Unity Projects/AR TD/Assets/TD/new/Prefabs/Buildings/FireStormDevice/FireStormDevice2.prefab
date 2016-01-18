@@ -77,7 +77,7 @@ GameObject:
   - 4: {fileID: 450404}
   - 198: {fileID: 19896632}
   - 199: {fileID: 19966216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - 4: {fileID: 467496}
   - 198: {fileID: 19807034}
   - 199: {fileID: 19910580}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - 4: {fileID: 404866}
   - 198: {fileID: 19855974}
   - 199: {fileID: 19937176}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - 4: {fileID: 419048}
   - 198: {fileID: 19804466}
   - 199: {fileID: 19920828}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dust Puff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - 4: {fileID: 451846}
   - 198: {fileID: 19889344}
   - 199: {fileID: 19996850}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   - 4: {fileID: 455808}
   - 198: {fileID: 19875686}
   - 199: {fileID: 19961464}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6982,6 +6982,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

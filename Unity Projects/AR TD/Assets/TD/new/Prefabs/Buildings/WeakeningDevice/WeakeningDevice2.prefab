@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 486664}
   - 198: {fileID: 19811464}
   - 199: {fileID: 19912336}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparkles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 489894}
   - 33: {fileID: 3388930}
   - 23: {fileID: 2321758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 453452}
-  m_Layer: 0
+  - 65: {fileID: 6540384}
+  m_Layer: 9
   m_Name: turret_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +96,7 @@ GameObject:
   - 33: {fileID: 3351808}
   - 23: {fileID: 2326942}
   - 114: {fileID: 11495252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +113,7 @@ GameObject:
   - 4: {fileID: 473092}
   - 198: {fileID: 19868452}
   - 199: {fileID: 19966536}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +147,7 @@ GameObject:
   - 4: {fileID: 439908}
   - 33: {fileID: 3311928}
   - 23: {fileID: 2339556}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Temperature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +164,7 @@ GameObject:
   - 4: {fileID: 484162}
   - 198: {fileID: 19851132}
   - 199: {fileID: 19923326}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +201,7 @@ GameObject:
   - 4: {fileID: 475800}
   - 198: {fileID: 19868240}
   - 199: {fileID: 19923962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +218,7 @@ GameObject:
   - 4: {fileID: 479504}
   - 198: {fileID: 19801994}
   - 199: {fileID: 19933524}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +253,7 @@ GameObject:
   - 4: {fileID: 446950}
   - 198: {fileID: 19837066}
   - 199: {fileID: 19977094}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dust Puff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +286,7 @@ GameObject:
   - 4: {fileID: 479824}
   - 198: {fileID: 19885668}
   - 199: {fileID: 19951998}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,6 +670,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111202}
   m_Mesh: {fileID: 4300000, guid: 03f80303eb362fc489b3fe5bab219a93, type: 3}
+--- !u!65 &6540384
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112014}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .5, y: .5, z: .5}
+  m_Center: {x: 0, y: .5, z: 0}
 --- !u!65 &6584448
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -8238,6 +8251,26 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Center.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.z
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

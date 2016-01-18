@@ -60,8 +60,11 @@ public class TechonologyDetailDisplayer : MonoBehaviour {
         //  }
       }
 
-      technologyDetailText.text = "需要金錢 : <color=yellow>" + game.ViewingTechnology.Cost + "</color>\n";
-      technologyDetailText.text += "<color=lime>" + GameConstants.DetailOfTechnologyID[(int)game.ViewingTechnology.ID] + "</color>";
+      technologyDetailText.text = "<color=orange>" + game.ViewingTechnology.Name + "</color>\n\n";
+
+      technologyDetailText.text += "<color=lime>" + GameConstants.DetailOfTechnologyID[(int)game.ViewingTechnology.ID] + "</color>\n\n";
+
+      technologyDetailText.text += "<color=red>需要金錢 : </color><color=yellow>" + game.ViewingTechnology.Cost + "</color>";
 
     } else {
       technologyIconImage.sprite = null;

@@ -14,6 +14,8 @@ public partial class Game : MonoBehaviour {
   }
 
   public Transform gameSceneParentTransform;
+  public GameObject vuforiaCameraGameObject;
+  private Camera vuforiaCamera;
 
   [SerializeField]
   private GameObject zones;
@@ -222,6 +224,28 @@ public partial class Game : MonoBehaviour {
       }
     }
 
+    Ray ray = vuforiaCamera.ScreenPointToRay(Input.mousePosition);
+    RaycastHit raycastHit;
+
+    // Hover
+    if (Physics.Raycast(ray, out raycastHit, 1000, buildingLayerMask)) {
+      Transform lastHoverBuildingTransform = raycastHit.collider.transform;
+      while (lastHoverBuildingTransform.GetComponent<CharacterStats>() == null) {
+        lastHoverBuildingTransform = lastHoverBuildingTransform.parent;
+      }
+      lastHoverBuilding = lastHoverBuildingTransform.gameObject;
+    } else {
+      lastHoverBuilding = null;
+    }
+
+    if (!EventSystem.current.IsPointerOverGameObject()) {
+      // Left button down
+      if (Input.GetMouseButtonDown(0)) {
+        if (playerState == GameConstants.PlayerState.IDLE) {
+          selectedBuilding = lastHoverBuilding;
+        }
+      }
+    }
     //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
     //RaycastHit raycastHit;
 
@@ -706,6 +730,8 @@ public partial class Game : MonoBehaviour {
 
     GameObject newZones = Instantiate(zones, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
     newZones.transform.parent = gameSceneParentTransform;
+
+    vuforiaCamera = vuforiaCameraGameObject.GetComponent<Camera>();
   }
 
 }

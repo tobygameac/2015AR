@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 422530}
   - 198: {fileID: 19877438}
   - 199: {fileID: 19947724}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - 4: {fileID: 481930}
   - 198: {fileID: 19818230}
   - 199: {fileID: 19971028}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lightning Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - 4: {fileID: 429360}
   - 198: {fileID: 19851786}
   - 199: {fileID: 19940388}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spakles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4004,6 +4004,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
