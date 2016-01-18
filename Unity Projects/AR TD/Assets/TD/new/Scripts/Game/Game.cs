@@ -241,8 +241,13 @@ public partial class Game : MonoBehaviour {
     if (!EventSystem.current.IsPointerOverGameObject()) {
       // Left button down
       if (Input.GetMouseButtonDown(0)) {
-        if (playerState == GameConstants.PlayerState.IDLE) {
-          selectedBuilding = lastHoverBuilding;
+        if (lastHoverBuilding != null) {
+          if (playerState == GameConstants.PlayerState.IDLE
+            || playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST
+            || playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
+            selectedBuilding = lastHoverBuilding;
+            playerState = GameConstants.PlayerState.IDLE;
+          }
         }
       }
     }

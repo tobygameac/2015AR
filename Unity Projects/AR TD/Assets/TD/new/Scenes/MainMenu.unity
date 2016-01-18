@@ -138,23 +138,23 @@ Prefab:
       objectReference: {fileID: 1159931106}
     - target: {fileID: 22491486, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22491486, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22472504, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22472504, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22472504, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11424452, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
       propertyPath: m_Text
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1159931105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e48fd6b0ba5364145b9b2a8af8b1be7c, type: 3}
   m_Name: 
