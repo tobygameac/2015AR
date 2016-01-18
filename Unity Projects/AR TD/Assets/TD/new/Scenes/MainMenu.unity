@@ -160,6 +160,11 @@ Prefab:
       propertyPath: m_Text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11484954, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2e063b858d543cb49b0f3e3264580dea,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3fe26a74920b0943b1d9e62b38ca346, type: 2}
   m_IsPrefabParent: 0

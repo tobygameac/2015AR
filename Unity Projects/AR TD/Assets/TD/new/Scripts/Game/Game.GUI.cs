@@ -26,6 +26,24 @@ public partial class Game : MonoBehaviour {
   private List<GameObject> buildingButtons;
   private List<GameObject> technologyButtons;
 
+  public void OnLeftButtonClick() {
+    if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
+      viewingBuildingIndex = (viewingBuildingIndex - 1 + BasicBuildingList.Count) % BasicBuildingList.Count;
+    }
+    if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
+      viewingTechnologyIndex = (ViewingTechnologyIndex - 1 + technologyManager.AvailableTechnology.Count) % technologyManager.AvailableTechnology.Count;
+    }
+  }
+
+  public void OnRightButtonClick() {
+    if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
+      viewingBuildingIndex = (viewingBuildingIndex + 1) % BasicBuildingList.Count;
+    }
+    if (playerState == GameConstants.PlayerState.VIEWING_TECHNOLOGY_LIST) {
+      viewingTechnologyIndex = (ViewingTechnologyIndex + 1) % technologyManager.AvailableTechnology.Count;
+    }
+  }
+
   public void OnViewBuildingListButtonClick() {
     if (gameState == GameConstants.GameState.FINISHED || gameState == GameConstants.GameState.LOSED) {
       return;
@@ -206,8 +224,8 @@ public partial class Game : MonoBehaviour {
   }
 
   private void InitializeUI() {
-    InstantiateBuildingButton();
-    InstantiateTechnologyButton();
+    //InstantiateBuildingButton();
+    //InstantiateTechnologyButton();
   }
 
 }

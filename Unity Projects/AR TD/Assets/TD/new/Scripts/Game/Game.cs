@@ -143,6 +143,7 @@ public partial class Game : MonoBehaviour {
       }
     }
   }
+
   public int ViewingTechnologyIndex {
     get {
       return _viewingTechnologyIndex;
@@ -380,6 +381,8 @@ public partial class Game : MonoBehaviour {
     //lastHoverBuilding = selectedBuilding = null;
     viewingBuildingIndex = viewingTechnologyIndex = -1;
 
+    viewingBuildingIndex = 0;
+
     AudioManager.PlayAudioClip(buttonSound);
 
     if (playerState == GameConstants.PlayerState.VIEWING_BUILDING_LIST) {
@@ -393,6 +396,8 @@ public partial class Game : MonoBehaviour {
   private void ViewTechnologyList() {
     //lastHoverBuilding = selectedBuilding = null;
     viewingBuildingIndex = viewingTechnologyIndex = -1;
+
+    viewingTechnologyIndex = 0;
 
     AudioManager.PlayAudioClip(buttonSound);
 
@@ -637,9 +642,9 @@ public partial class Game : MonoBehaviour {
 
     AudioManager.PlayAudioClip(researchSound);
 
-    viewingTechnologyIndex = -1;
+    viewingTechnologyIndex = 0;
 
-    InstantiateTechnologyButton();
+    //InstantiateTechnologyButton();
 
     return true;
   }
