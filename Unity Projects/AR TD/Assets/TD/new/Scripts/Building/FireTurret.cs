@@ -60,7 +60,7 @@ public class FireTurret : MonoBehaviour {
           FXParticleSystem[i].Play();
         }
       }
-      Quaternion desiredRotation = Quaternion.LookRotation(target.position - muzzleBase.position);
+      Quaternion desiredRotation = Quaternion.LookRotation(transform.InverseTransformDirection(target.position - muzzleBase.position));
       desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y, muzzleBase.localEulerAngles.z); // y-axis only
       muzzleBase.localRotation = Quaternion.Slerp(muzzleBase.localRotation, desiredRotation, Time.deltaTime * turningSpeed);
     } else {
@@ -86,7 +86,7 @@ public class FireTurret : MonoBehaviour {
       }
       //if (Time.time >= nextAttackTime) {
       for (int i = 0; i < muzzles.Length; ++i) {
-        Quaternion desiredRotation = Quaternion.LookRotation(collider.transform.position - muzzleBase.position);
+        Quaternion desiredRotation = Quaternion.LookRotation(transform.InverseTransformDirection(target.position - muzzleBase.position));
         desiredRotation.eulerAngles = new Vector3(muzzleBase.localEulerAngles.x, desiredRotation.eulerAngles.y, muzzleBase.localEulerAngles.z); // y-axis only
         float angleToEnemy = Quaternion.Angle(muzzleBase.localRotation, desiredRotation);
         if (angleToEnemy <= attackingAngleForEachMuzzle / 2) {

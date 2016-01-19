@@ -50,7 +50,7 @@ public class Turret : MonoBehaviour {
 
   void Update() {
     if (target != null) {
-      Quaternion desiredRotation = Quaternion.LookRotation(target.position - turretBall.position);
+      Quaternion desiredRotation = Quaternion.LookRotation(transform.InverseTransformDirection(target.position - turretBall.position));
       desiredRotation.eulerAngles = new Vector3(turretBall.localEulerAngles.x, desiredRotation.eulerAngles.y, turretBall.localEulerAngles.z); // y-axis only
       turretBall.localRotation = Quaternion.Slerp(turretBall.localRotation, desiredRotation, Time.deltaTime * turningSpeed);
       if (Time.time >= nextFireTime) {
