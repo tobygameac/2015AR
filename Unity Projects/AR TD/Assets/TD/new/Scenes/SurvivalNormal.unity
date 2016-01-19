@@ -434,7 +434,7 @@ Prefab:
       objectReference: {fileID: 121699081}
     - target: {fileID: 11471780, guid: fc96f8124b40af64b947633c72446b25, type: 2}
       propertyPath: restingTimeBeforeStart
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 413440, guid: fc96f8124b40af64b947633c72446b25, type: 2}
       propertyPath: m_LocalPosition.x
@@ -474,7 +474,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11471780, guid: fc96f8124b40af64b947633c72446b25, type: 2}
       propertyPath: restingTimeBetweenWaves
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11412740, guid: fc96f8124b40af64b947633c72446b25, type: 2}
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbcf96c289910544953cc87db002693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combinationDistance: 3
+  combinationDistance: 1.5
   checkTimeGap: .100000001
   combinationFXObject: {fileID: 931768471}
   markersToTrack:
