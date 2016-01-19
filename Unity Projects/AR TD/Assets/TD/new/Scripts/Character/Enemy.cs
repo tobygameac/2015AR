@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof(CharacterStats))]
+[RequireComponent(typeof(CharacterStats))]
 public class Enemy : MonoBehaviour {
 
   private static GameManager gameManager;

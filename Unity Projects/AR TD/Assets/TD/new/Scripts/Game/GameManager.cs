@@ -295,7 +295,7 @@ public class GameManager : MonoBehaviour {
 
     for (int bossNumber = 0; bossNumber < bossCount; ++bossNumber) {
 
-      int maximalIndexRangeOfBossToGenerate = CurrentWave / 5;
+      int maximalIndexRangeOfBossToGenerate = (CurrentWave / 5) + 1;
 
       if (maximalIndexRangeOfBossToGenerate > bossPrefabs.Count) {
         maximalIndexRangeOfBossToGenerate = bossPrefabs.Count;
@@ -354,7 +354,7 @@ public class GameManager : MonoBehaviour {
     /* temp */
     /* temp */
     //numberOfEnemiesToGenerate = 10 + (currentWave - 1) * 5 * (int)Mathf.Pow(1.1f, currentWave);
-    numberOfEnemiesToGenerate = 10 + (int)Mathf.Pow(1.2f, currentWave);
+    numberOfEnemiesToGenerate = 10 + (currentWave - 1) * 3 * (int)Mathf.Pow(1.1f, currentWave);
     if ((game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
       remainingTimeOfCurrentWave = 45 + ((currentWave - 1) * 5) + GameConstants.ADDITIONAL_TIME_BY_LAST_STAND;
 

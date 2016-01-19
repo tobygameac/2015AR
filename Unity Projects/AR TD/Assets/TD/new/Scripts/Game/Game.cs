@@ -542,6 +542,8 @@ public partial class Game : MonoBehaviour {
       //viewingBuildingIndex = -1;
       viewingBuildingIndex = 0;
 
+      playerState = GameConstants.PlayerState.IDLE;
+
       return true;
     }
 
