@@ -6,6 +6,10 @@ using System.Collections.Generic;
 public partial class Game : MonoBehaviour {
 
   [SerializeField]
+  private List<GameObject> coreGameObjects;
+  private List<CharacterStats> coreGameObjectsStats;
+
+  [SerializeField]
   private GameConstants.GameMode gameMode;
   public GameConstants.GameMode GameMode {
     get {
@@ -665,6 +669,12 @@ public partial class Game : MonoBehaviour {
       GameConstants.ADDITIONAL_TIME_BY_LAST_STAND += GameConstants.LAST_STAND_ADDITIONAL_TIME;
     }
 
+    if (newTechnology.ID == GameConstants.TechnologyID.SELF_HEALING) {
+      for (int i = 0; i < coreGameObjects.Count; ++i) {
+        coreGameObjectsStats[i].CurrentHP += GameConstants.SELF_HEALING_AMOUNT;
+      }
+    }
+
     technologyManager.ResearchTechnology(technologyIndex);
 
     MessageManager.AddMessage("研發完成 : " + newTechnology.Name);
@@ -739,6 +749,14 @@ public partial class Game : MonoBehaviour {
     newZones.transform.parent = gameSceneParentTransform;
 
     vuforiaCamera = vuforiaCameraGameObject.GetComponent<Camera>();
+
+    coreGameObjectsStats = null;
+    if (coreGameObjects != null && coreGameObjects.Count > 0) {
+      coreGameObjectsStats = new List<CharacterStats>(new CharacterStats[coreGameObjects.Count]);
+      for (int i = 0; i < coreGameObjects.Count; ++i) {
+        coreGameObjectsStats[i] = coreGameObjects[i].GetComponent<CharacterStats>();
+      }
+    }
   }
 
 }

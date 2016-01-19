@@ -202,8 +202,8 @@ public class CharacterStats : MonoBehaviour {
   }
 
   [SerializeField]
-  private int _attackingRange;
-  public int AttackingRange {
+  private float _attackingRange;
+  public float AttackingRange {
     get {
       return _attackingRange;
     }

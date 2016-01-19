@@ -472,14 +472,14 @@ MonoBehaviour:
   _enemyID: 0
   _basicHP: 0
   _hPModifier: 0
-  _basicDamage: 50
+  _basicDamage: 45
   _damageModifier: 0
   _basicAttackingSpeed: 1.10000002
   _attackingSpeedModifier: 0
   _basicMovingSpeed: 0
   _movingSpeedModifier: 0
-  _cost: 150
-  _attackingRange: 2
+  _cost: 200
+  _attackingRange: 3
   _nextLevel: {fileID: 136044, guid: 4c691339767ac8c4fb51481998774252, type: 2}
   _path: []
 --- !u!114 &11449604
@@ -709,15 +709,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _cost
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _attackingRange
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _basicDamage
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _nextLevel

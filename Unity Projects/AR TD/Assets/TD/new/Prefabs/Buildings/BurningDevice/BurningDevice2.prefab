@@ -573,14 +573,14 @@ MonoBehaviour:
   _enemyID: 0
   _basicHP: 0
   _hPModifier: 0
-  _basicDamage: 20
+  _basicDamage: 10
   _damageModifier: 0
   _basicAttackingSpeed: 1
   _attackingSpeedModifier: 0
   _basicMovingSpeed: 0
   _movingSpeedModifier: 0
-  _cost: 500
-  _attackingRange: 3
+  _cost: 300
+  _attackingRange: 2.5
   _nextLevel: {fileID: 127378, guid: afc7745ae67d4e24bb617180bddb2024, type: 2}
   _path: []
 --- !u!114 &11445396
@@ -8035,11 +8035,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _basicDamage
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _attackingRange
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _nextLevel
@@ -8092,6 +8092,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Size.x
       value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _cost
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

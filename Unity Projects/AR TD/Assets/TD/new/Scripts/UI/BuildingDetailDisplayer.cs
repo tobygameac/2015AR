@@ -54,16 +54,16 @@ public class BuildingDetailDisplayer : MonoBehaviour {
 
       buildingDetailText.text = "<color=orange>" + GameConstants.NameOfBuildingID[(int)characterStats.BuildingID] + "</color>\n\n";
 
-      buildingDetailText.text += "<color=lime>" + characterStats.description + "</color>\n\n";
+      buildingDetailText.text += "<color=#ffffff>" + characterStats.description + "</color>\n\n";
 
       if (game.SelectedBuilding != null) {
         int originalCost = game.SelectedBuilding.GetComponent<CharacterStats>().Cost;
         int need = characterStats.Cost - originalCost;
         changeButton.interactable = true;
-        if (need >= 0) {
-          buildingDetailText.text += "<color=red>需要金錢 : </color><color=yellow>" + need + "</color>\n\n";
+        if (need > 0) {
+          buildingDetailText.text += "<color=#ff0000>需要金錢 : </color><color=yellow>" + need + "</color>\n\n";
         } else {
-          buildingDetailText.text += "<color=green>取回金錢 : </color><color=yellow>" + -need + "</color>\n\n";
+          buildingDetailText.text += "<color=#00ff00>取回金錢 : </color><color=yellow>" + -need + "</color>\n\n";
         }
       } else {
         changeButton.interactable = false;

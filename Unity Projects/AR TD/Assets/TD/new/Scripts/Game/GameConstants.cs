@@ -122,7 +122,7 @@ public static class GameConstants {
         _detailOfTechnologyID[(int)TechnologyID.SELF_LEARNING] = "裝置將根據擊殺數來增強攻擊力，每個擊殺數增加 ";
         _detailOfTechnologyID[(int)TechnologyID.SELF_LEARNING] += (SELF_LEARNING_IMPROVEMENT_PERCENT_PER_KILL * 100).ToString("0.00") + "% 傷害";
 
-        _detailOfTechnologyID[(int)TechnologyID.SELF_HEALING] = "寶箱將隨時間快速恢復生命值";
+        _detailOfTechnologyID[(int)TechnologyID.SELF_HEALING] = "寶箱將恢復 " + SELF_HEALING_AMOUNT + " 點生命值";
         _detailOfTechnologyID[(int)TechnologyID.ADDITIONAL_BUILDING_NUMBER] = "增加 " + ADDITIONAL_BUILDING_NUMBER_PER_RESEARCH + " 個最大可建裝置數量";
 
         _detailOfTechnologyID[(int)TechnologyID.FREEZING_LEVEL1] = "場上敵軍減慢 ";
@@ -151,6 +151,8 @@ public static class GameConstants {
 
   public static readonly float LAST_STAND_ADDITIONAL_TIME = 10.0f;
 
+  public static readonly float SELF_HEALING_AMOUNT = 5.0f;
+
   // Enemy improvement
   public static readonly float PROBABILITY_OF_STRONGGER = 0.10f;
   public static readonly float COST_SCALE_OF_STRONGGER = 1.05f;
@@ -176,12 +178,12 @@ public static class GameConstants {
 
   // Other modifier
   public static readonly int[] WAVE_THERSHOLD_FOR_THE_NEXT_HP_SCALER = new int[] { 1, 3, 5, 7, 10, 12, 15, 20, 30, 50 };
-  public static readonly float[] HP_SCALER_FOR_WAVE = new float[] { 1.0f, 1.1f, 1.3f, 1.5f, 1.7f, 1.8f, 2.0f, 1.6f, 1.4f, 1.2f };
+  public static readonly float[] HP_SCALER_FOR_WAVE = new float[] { 1.0f, 1.1f, 1.05f, 1.25f, 1.35f, 1.4f, 1.5f, 1.3f, 1.2f, 1.1f };
 
-  public static readonly float COST_MODIFIER_FOR_EACH_WAVE = 0.5f;
+  public static readonly float COST_MODIFIER_FOR_EACH_WAVE = 0.3f;
 
   public static readonly float ENEMY_MOVING_SPEED_FLOATING_MODIFIER = 0.02f;
-  public static readonly float ENEMY_MOVING_SPEED_MODIFIER_FOR_EACH_WAVE = 0.08f;
+  public static readonly float ENEMY_MOVING_SPEED_MODIFIER_FOR_EACH_WAVE = 0.04f;
 
   public static readonly float ONE_SHOT_KILL_BONUS_MODIFIER = 0.25f;
   public static readonly float SELF_LEARNING_IMPROVEMENT_PERCENT_PER_KILL = 0.001f;

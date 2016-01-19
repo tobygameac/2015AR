@@ -656,7 +656,7 @@ MonoBehaviour:
   _attackingSpeedModifier: 0
   _basicMovingSpeed: .25
   _movingSpeedModifier: 0
-  _cost: 15
+  _cost: 30
   _attackingRange: 0
   _nextLevel: {fileID: 0}
   _path:
@@ -1066,7 +1066,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: _cost
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _basicMovingSpeed

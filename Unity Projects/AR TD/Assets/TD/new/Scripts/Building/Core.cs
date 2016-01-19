@@ -30,13 +30,13 @@ public class Core : MonoBehaviour {
   }
 
   void Update() {
-    if (!hasHealingTechnology) {
-      hasHealingTechnology = game.HasTechnology(GameConstants.TechnologyID.SELF_HEALING);
-    }
+    //if (!hasHealingTechnology) {
+    //  hasHealingTechnology = game.HasTechnology(GameConstants.TechnologyID.SELF_HEALING);
+    //}
 
-    if (hasHealingTechnology) {
-      characterStats.CurrentHP += characterStats.MaxHP * GameConstants.HP_PERCENT_REGENERATING_PER_SECOND_OF_SELF_HEALING * Time.deltaTime;
-    }
+    //if (hasHealingTechnology) {
+    //  characterStats.CurrentHP += characterStats.MaxHP * GameConstants.HP_PERCENT_REGENERATING_PER_SECOND_OF_SELF_HEALING * Time.deltaTime;
+    //}
   }
 
   void OnTriggerEnter(Collider collider) {

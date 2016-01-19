@@ -606,7 +606,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: _basicDamage
-      value: 600
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: _cost
