@@ -28,7 +28,7 @@ public class InformationText : MonoBehaviour {
       text.text += "<size=20>寶箱生命 : <color=red>" + coreGameObjectsStats[i].CurrentHP + "</color> / <color=red>" + coreGameObjectsStats[i].MaxHP + "</color></size>\n\n";
     }
 
-    text.text += "金錢 : <color=yellow>" + game.Money + "</color>\n";
+    text.text += "金錢 : <color=#ffff00>" + game.Money + "</color>\n";
 
     //if (game.CurrentBuildingNumber == game.MaxBuildingNumber) {
     //  text.text += "裝置數量 : <color=red>" + game.CurrentBuildingNumber + "</color> / <color=red>" + game.MaxBuildingNumber + "</color>\n";
@@ -37,9 +37,9 @@ public class InformationText : MonoBehaviour {
     //}
 
     if (game.GameMode == GameConstants.GameMode.STORY) {
-      text.text += "波數 : <color=blue>" + gameManager.CurrentWave + "</color> / <color=blue>" + gameManager.MaxWave + "</color>\n";
+      text.text += "波數 : <color=green>" + gameManager.CurrentWave + "</color> / <color=blue>" + gameManager.MaxWave + "</color>\n";
     } else if ((game.GameMode == GameConstants.GameMode.SURVIVAL_NORMAL) || (game.GameMode == GameConstants.GameMode.SURVIVAL_BOSS)) {
-      text.text += "波數 : <color=blue>" + gameManager.CurrentWave + "</color>\n";
+      text.text += "波數 : <color=#00ff00>" + gameManager.CurrentWave + "</color>\n";
     }
     text.text += "\n";
 
@@ -49,17 +49,17 @@ public class InformationText : MonoBehaviour {
         if (gameManager.CurrentWave == 0) {
           remainingTime = (int)(gameManager.RestingTimeBeforeStart - gameManager.RestedTime);
         }
-        text.text += "<color=black>敵軍將於 ";
+        text.text += "<color=white>敵軍將於 ";
         if (remainingTime >= remainingTimeAlertTime) {
-          text.text += "<color=blue>";
+          text.text += "<color=#00ff00>";
         } else {
           int alpha = (int)((Mathf.Sin(Time.time * alertSpeed) + 1) / 2 * 255);
-          text.text += "<color=#0000ff" + alpha.ToString("X2") + ">";
+          text.text += "<color=#00ff00" + alpha.ToString("X2") + ">";
         }
         text.text += remainingTime + "</color> 秒後進行下一波攻勢</color>\n\n";
       } else if (gameManager.GameState == GameConstants.GameState.MIDDLE_OF_THE_WAVE) {
-        //text.text += "場上敵軍數量 : <color=blue>" + gameManager.NumberOfEnemiesOnMap + "</color>\n";
-        text.text += "尚未出現敵軍數量 : <color=blue>" + gameManager.NumberOfEnemiesToGenerate + "</color>\n\n";
+        //text.text += "場上敵軍數量 : <color=green>" + gameManager.NumberOfEnemiesOnMap + "</color>\n";
+        text.text += "尚未出現敵軍數量 : <color=#00ff00>" + gameManager.NumberOfEnemiesToGenerate + "</color>\n\n";
         //int remainingTime = (int)gameManager.RemainingTimeOfCurrentWave;
         //text.text += "<color=black>下一波敵軍將於 ";
         //if (remainingTime >= remainingTimeAlertTime) {

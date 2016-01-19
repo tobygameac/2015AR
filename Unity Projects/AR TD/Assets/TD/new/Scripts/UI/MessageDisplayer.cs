@@ -17,7 +17,7 @@ public class MessageDisplayer : MonoBehaviour {
     bool lastMessage = true;
     for (int i = MessageManager.Messages.Count - 1; i >= Mathf.Max(0, MessageManager.Messages.Count - maxDisplayMessageNumber); --i) {
       if (lastMessage) {
-        messageToDisplay += "<color=red>" + MessageManager.Messages[i] + "</color><color=#c1da9340><i>\n";
+        messageToDisplay += "<color=red>" + MessageManager.Messages[i] + "</color><color=#aaaaaa><i>\n";
         lastMessage = false;
       } else {
         messageToDisplay += MessageManager.Messages[i] + "\n";
