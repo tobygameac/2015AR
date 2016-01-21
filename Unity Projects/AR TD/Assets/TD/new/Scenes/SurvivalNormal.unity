@@ -550,11 +550,11 @@ Prefab:
       objectReference: {fileID: 408891171}
     - target: {fileID: 11413674, guid: fc96f8124b40af64b947633c72446b25, type: 2}
       propertyPath: _basicHP
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 11486172, guid: fc96f8124b40af64b947633c72446b25, type: 2}
       propertyPath: basicmoney
-      value: 5000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 403582, guid: fc96f8124b40af64b947633c72446b25, type: 2}
       propertyPath: m_LocalRotation.y
